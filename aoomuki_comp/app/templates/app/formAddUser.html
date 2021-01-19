@@ -1,0 +1,209 @@
+{% extends "app/base_site.html" %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="text-center text-success " >
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3>{{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="title_left">
+                <h3>AJOUTER UN UTILISATEUR</h3>
+            </div>  
+        </div>
+        <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Formulaire d'ajout <small>Veuilez saisir tout les champs requis</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form method="POST" class="post-form" id="myForm" >{% csrf_token %}
+                            {{ form1.as_ul }}
+                            {% comment %} <div>
+  <input type="checkbox"  id="checkbox" name="collab" checked>
+  <label for="collab">Souhaitez-vous l'ajouter en tant que collabaorateur également?</label>
+</div> {% endcomment %}
+                            <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="page-title">
+                {% comment %} <div class="text-center text-success " >
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h3>{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                </div> {% endcomment %}
+                <div class="title_left">
+                    <h3>AJOUTER UN COLLABORATEUR</h3>
+                </div>  
+            </div>
+            <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Formulaire d'ajout <small>Veuilez saisir tout les champs requis</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <form method="POST" class="post-form" >{% csrf_token %}
+                                {{ form2.as_ul }}
+                                {% comment %} <div>
+      <input type="checkbox"  id="checkbox" name="collab" checked>
+      <label for="collab">Souhaitez-vous l'ajouter en tant que collabaorateur également?</label>
+    </div> {% endcomment %}
+                                <button type="submit" name="btnform2" class="save btn btn-default">VALIDER</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        {% endblock %}
+
+
+ {% comment %} <script> 
+        // wait for the DOM to be loaded 
+        $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            $('#myForm').ajaxForm(function() { 
+                alert("Thank you for your comment!"); 
+            }); 
+        }); 
+    </script>  {% endcomment %}
+
+
+{% comment %} {% extends "app/base_site.html" %}
+
+{% block title %} Login {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Animate.css -->
+  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block body_class %}login{% endblock body_class %}
+
+{% block body %}
+   <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form>
+            <h1>S'enregistrer</h1>
+            <div class="x_content">
+                <form method="POST" class="post-form" >{% csrf_token %}
+                    {{ form.as_ul }}
+                    <button type="submit" class="save btn btn-default">S'enregistrer</button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">Already a member ?
+                <a href="#signin" class="to_register"> Log in </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endblock body %}  {% endcomment %}
+
+
+  {% comment %} <div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form>
+            <h1>S'enregistrer</h1>
+            <div class="x_content">
+                <form method="POST" class="post-form" >{% csrf_token %}
+                    {{ form.as_ul }}
+                    <button type="submit" class="save btn btn-default">S'enregistrer</button>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="separator">
+            <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1><i class=""></i>AoOMuki</h1>
+                <p>Solutions digitales</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <div id="register" class="animate form registration_form">
+        <section class="login_content">
+          <form>
+            <h1>Create Account</h1>
+            <div>
+              <input type="text" class="form-control" placeholder="Username" required="" />
+            </div>
+            <div>
+              <input type="email" class="form-control" placeholder="Email" required="" />
+            </div>
+            <div>
+              <input type="password" class="form-control" placeholder="Password" required="" />
+            </div>
+            <div>
+              <a class="btn btn-default submit" href="index.html">Submit</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">Already a member ?
+                <a href="#signin" class="to_register"> Log in </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endblock body %} {% endcomment %}
+
+

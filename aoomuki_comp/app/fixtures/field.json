@@ -1,0 +1,82 @@
+[
+    {
+        "model": "app.field",
+        "pk": 1,
+        "fields": {
+          "name": "CRM",
+          "description": "CRM"
+      }
+    },
+    {
+      "model": "app.field",
+      "pk": 2,
+      "fields": {
+        "name": "language",
+        "description": "language"
+      }
+    },
+    {
+        "model": "app.field",
+        "pk": 3,
+        "fields": {
+            "name": "ETL",
+            "description": "ETL"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 4,
+        "fields": {
+          "name": "transverse_comp",
+          "description": "transverse_comp"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 5,
+        "fields": {
+          "name": "frameworks",
+          "description": "frameworks"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 6,
+        "fields": {
+          "name": "MA",
+          "description": "MA"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 7,
+        "fields": {
+          "name": "Qualité",
+          "description": "Qualité"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 8,
+        "fields": {
+          "name": "gestion de projet",
+          "description": "gestionM de projet"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 9,
+        "fields": {
+          "name": "documentation",
+          "description": "documentation"
+        }
+      },
+      {
+        "model": "app.field",
+        "pk": 10,
+        "fields": {
+          "name": "design",
+          "description": "design"
+        }
+      }
+  ]

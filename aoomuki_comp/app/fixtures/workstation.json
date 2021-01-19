@@ -1,0 +1,67 @@
+[
+    {
+        "model": "app.listworkstation",
+        "pk": 1,
+        "fields": {
+          "name": "developpeur",
+          "commentary": "developpeur"
+      }
+    },
+    {
+      "model": "app.listworkstation",
+      "pk": 2,
+      "fields": {
+        "name": "designer",
+        "commentary": "designer"
+      }
+    },
+    {
+        "model": "app.listworkstation",
+        "pk": 3,
+        "fields": {
+          "name": "manager",
+          "commentary": "manager"
+        }
+      },
+      {
+        "model": "app.listworkstation",
+        "pk": 4,
+        "fields": {
+          "name": "directeur",
+          "commentary": "directeur"
+        }
+      },
+      {
+        "model": "app.listworkstation",
+        "pk": 5,
+        "fields": {
+          "name": "responsable",
+          "commentary": "responsable"
+        }
+      },
+      {
+        "model": "app.listworkstation",
+        "pk": 6,
+        "fields": {
+          "name": "RH",
+          "commentary": "RH"
+        }
+      },
+      {
+        "model": "app.listworkstation",
+        "pk": 7,
+        "fields": {
+          "name": "stagiaire",
+          "commentary": "stagiaire"
+        }
+      },
+      {
+        "model": "app.listworkstation",
+        "pk": 8,
+        "fields": {
+          "name": "administration",
+          "commentary": "administration"
+        }
+      }
+
+  ]

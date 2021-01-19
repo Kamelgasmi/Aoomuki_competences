@@ -1,0 +1,186 @@
+{% extends "app/base_site.html" %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Ajout de compétences</h3>
+        </div>
+
+        
+      </div>
+      <div class="clearfix"></div>
+          <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                      <div class="x_title">
+                          <h2>Formulaire d'ajout<small>Veuilez saisir tout les champs requis</small></h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                              <li>
+                                  <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                  <ul class="dropdown-menu" role="menu">
+                                      <li>
+                                          <a href="#">Settings 1</a>
+                                      </li>
+                                      <li>
+                                          <a href="#">Settings 2</a>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a class="close-link"><i class="fa fa-close"></i></a>
+                              </li>
+                          </ul>
+                          <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                      <br />
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12 text-warning" for="first-name">Collaborateur <span class="required">*</span></label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <select name="Utilisateurs" class="form-control">
+                                  {% for results in showCollab %}
+                                      <option value="{{ results.id}}">{{ results.Lastname | upper}} {{ results.Firstname}}</option>
+                                  {% endfor %}
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12 text-warning" for="society">Société <span class="required">*</span></label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <select name="Société" class="form-control">
+                                  {% for results in showSociety %}
+                                  <option value="{{ results.id}}">{{ results.name}}</option>
+                                  {% endfor %}
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12 text-warning" for="workStation">Poste <span class="required">*</span></label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <select name="Poste" class="form-control">
+                                  {% for results in showWorkStation %}
+                                  <option value="{{ results.id}}">{{ results.name}}</option>
+                                  {% endfor %}
+                                  </select>
+                              </div>
+                          </div>
+                          
+                {% comment %} <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="field">Domaines <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                     <select name="domaines" class="form-control">
+                      {% for results in showField %}
+                      <label for="{{ field.id_for_label }}">{{ field.value }}</label>
+                      <option value="{{ results.id}}">{{ results.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div> {% endcomment %}
+
+                  <div class="form-group">
+                      <label class="control-label col-md-6 col-sm-6 col-xs-12 text-warning" for="first-name">CERTIFICATIONS</label>
+                      <div class="row col-md-12 col-sm-12 col-xs-12">
+                      {% for results in showCertification %}
+                      <p><input value="{{ results.id }}" type="checkbox" name="check">{{ results.name}}</p>
+                      {% endfor %}
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label col-md-6 col-sm-6 col-xs-12 text-warning" for="first-name">DOMAINES / COMPÉTENCES</label>
+                      <div class="row col-md-12 col-sm-12 col-xs-12">
+                      {% for field in fields %}
+                          <div class=" col-md-12 col-sm-6 col-xs-12 justify-content-center">
+                              <div class=" justify-content-center">
+                                  <table class="mb-5 mt-5">
+                                      <h4 class="text-danger">{{ field.name }}</h4> 
+                                      <tr>
+                                          <th class="text-warning" scope="col">Compétences</th>
+                                          <th class="text-warning" scope="col">Niveau</th>
+                                          <th class="text-warning" scope="col">Intérêt</th>
+                                      </tr>
+                                      {% for results in showComp %}
+                                          {% if field.id == results.field_id %}
+                                              <tr height="50">
+                                                  <td width="200" scope="row">
+                                                      <input value="{{ field.id }}" type="checkbox" name="check">{{ results.name}}
+                                                  </td>
+                                                  <td width="100">
+                                                      <select class="form-control form-control-sm justify-content-center">
+                                                      {% for results in showLevel %}
+                                                      <option value="{{ results.id}}">{{ results.value}}</option>
+                                                      {% endfor %}
+                                                      </select>
+                                                  </td>
+                                                  <td width="100">
+                                                      <select class="form-control form-control-sm">
+                                                      {% for results in showInterest %}
+                                                      <option value="{{ results.id}}">{{ results.value}}</option>
+                                                      {% endfor %}
+                                                      </select>
+                                                  </td>
+                                              </tr>
+                                          {% endif %}
+                                      {% endfor %}
+                                  </table>
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>
+                    </div>
+                {% comment %} <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Niveau<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control">
+                        {% for results in showLevel %}
+                        <option value="{{ results.id}}">{{ results.value}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Intérêt pour la techno</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control">
+                        {% for results in showLevel %}
+                        <option value="{{ results.id}}">{{ results.value}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                </div> {% endcomment %}
+                {% comment %} <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Formateur</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div id="gender" class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                        <input type="radio" name="Formateur" value="oui"> &nbsp; OUI &nbsp;
+                      </label>
+                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                        <input type="radio" name="Formateur" value="non"> NON
+                      </label>
+                    </div>
+                  </div>
+                </div> {% endcomment %}
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button class="btn btn-primary" type="button">Valider</button>
+                    {% comment %} <button class="btn btn-primary" type="reset">Reset</button> {% endcomment %}
+                    {% comment %} <button type="submit" class="btn btn-success">Envoyer</button> {% endcomment %}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

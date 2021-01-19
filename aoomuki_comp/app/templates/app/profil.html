@@ -1,0 +1,82 @@
+{% extends 'app/base_site.html' %}
+
+{% block content %} 
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="">
+                <div class="col-12 text-center">
+                    <h1>{{ collaborater.Lastname }} {{ collaborater.Firstname }} ({{ collaborater.statut.name }})</h1>
+                    <h2>{{ collaborater.society.name }}</h2>
+                    <h2>{{ collaborater.workstation.name }}</h2>
+                    <form class="form-inline" action="{% url 'app:DeleteCollab' collaborater_id=collaborater.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ collaborater.Lastname }} {{ collaborater.Firstname }} ');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Supprimer le collaborateur</button>
+                    </form> 
+                </div>
+                <div class="row border border-success">
+                    <div class="col-md-12 text-center text-danger ">
+                        <h3>CERTIFICATIONS</h3>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-12 text-center ">
+                        {% for certification in collaborater.certification.all %}
+                        <li>{{ certification.name}}</li>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-12 text-center text-danger ">
+                        <h3>DOMAINES / COMPÉTENCES</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for field in field %}
+                    <div class="col-md-8 ">
+                        <table class="mb-5 mt-5">
+                            <h4 class="text-danger">{{ field.name}}</h4>
+                            <tr>
+                                <th class="text-warning" scope="col">Compétence</th>
+                                <th class="text-warning" scope="col">Niveau</th>
+                                <th class="text-warning" scope="col">Intérêt</th>
+                            </tr>
+                                {% for competence in collaborater.competences.all%}
+                                    {% if competence.field_id == field.id %}
+                            <tr height="50">
+                                <td width="200" scope="row">
+                                    <p>{{ competence.name | upper}}</p>
+                                </td>
+                                <td width="200" scope="row">
+                                    <p></p>
+                                </td>
+                                <td width="200" scope="row">
+                                    <p></p>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+
+{% comment %} <div class="col-md-12 text-center">
+    <p>{{ collaborater.Lastname }} {{ collaborater.Firstname }}</p> {% endcomment %}
+    {% comment %} <li>{{ collaborater.competences__name }}</li> {% endcomment %}
+    {% comment %} <li>{{ interests_value }}</li> {% endcomment %}
+{% comment %} </div> {% endcomment %}
+
+
+{% comment %} {% for collaborater in collaboraters %} {% endcomment %}
+ {% comment %} <p>{{ collaboraters_lastname }} {{ collaboraters_firstname }}</p>
+    <li>{{ competences_name }}</li> {% endcomment %}
+
+    {% comment %} <p>{{ interest_name }}</p> {% endcomment %}
+{% comment %} {% endfor%} {% endcomment %}
