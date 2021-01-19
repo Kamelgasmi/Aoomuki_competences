@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql', # on utilise l'adaptateur postgresql
         'NAME': 'aoomuki_comp', # le nom de notre base de donnees creee precedemment
         'USER': 'postgres', # attention : remplacez par votre nom d'utilisateur
-        'PASSWORD': 'boubou',
+        'PASSWORD': 'romu7668',
         'HOST': '',
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,
