@@ -5,10 +5,10 @@
         "fields": {
           "Lastname": "Bermont",
           "Firstname": "Romuald",
-          "Externe": true,
+          "Extern": true,
           "workstation_id": "1",
           "society_id": "1",
-          "status_id": "2",
+          "statut_id": "2",
           "user_id": "2"
       }
     },
@@ -18,10 +18,10 @@
         "fields": {
           "Lastname": "Durpoix",
           "Firstname": "Stéphane",
-          "Externe": true,
-          "workstation_id": "4",
+          "Extern": true,
+          "workstation_id": "4",  
           "society_id": "1",
-          "status_id": "1",
+          "statut_id": "1",
           "user_id": "3"
       }
     },
@@ -31,10 +31,10 @@
         "fields": {
           "Lastname": "Langry",
           "Firstname": "Wilfried",
-          "Externe": true,
+          "Extern": true,
           "workstation_id": "1",
           "society_id": "1",
-          "status_id": "2",
+          "statut_id": "2",
           "user_id": "5"
       }
     },
@@ -44,10 +44,10 @@
         "fields": {
           "Lastname": "Prêtre",
           "Firstname": "Nicolas",
-          "Externe": true,
+          "Extern": true,
           "workstation_id": "1",
           "society_id": "1",
-          "status_id": "2",
+          "statut_id": "2",
           "user_id": "4"
       }
     },
@@ -57,10 +57,10 @@
         "fields": {
           "Lastname": "Michalowski",
           "Firstname": "Pauline",
-          "Externe": true,
+          "Extern": true,
           "workstation_id": "1",
           "society_id": "1",
-          "status_id": "2",
+          "statut_id": "2",
           "user_id": null
       }
     }

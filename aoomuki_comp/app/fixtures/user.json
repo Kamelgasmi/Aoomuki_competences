@@ -7,7 +7,7 @@
           "Firstname": "Kamel",
           "login": "kamel",
           "password": "kamel",
-          "status_id": "2"
+          "statut_id": "2"
       }
     },
     {
@@ -18,7 +18,7 @@
           "Firstname": "Romuald",
           "login": "romuald",
           "password": "romuald",
-          "status_id": "2"
+          "statut_id": "2"
       }
     },
     {
@@ -29,7 +29,7 @@
           "Firstname": "Stéphane",
           "login": "stéphane",
           "password": "stéphane",
-          "status_id": "1"
+          "statut_id": "1"
       }
     },
     {
@@ -40,7 +40,7 @@
           "Firstname": "Nicolas",
           "login": "nicolas",
           "password": "nicolas",
-          "status_id": "1"
+          "statut_id": "1"
       }
     },
     {
@@ -51,7 +51,7 @@
           "Firstname": "Wilfried",
           "login": "wilfried",
           "password": "wilfried",
-          "status_id": "2"
+          "statut_id": "2"
       }
     }
 ]
