@@ -33,7 +33,7 @@
                 </div>
                 <div class="row">
                     {% for field in field %}
-                    <div class="col-md-8 ">
+                    <div class="col-md-12 ">
                         <table class="mb-5 mt-5">
                             <h4 class="text-danger">{{ field.name}}</h4>
                             <tr>
@@ -44,13 +44,13 @@
                                 {% for competence in collaborater.competences.all%}
                                     {% if competence.field_id == field.id %}
                             <tr height="50">
-                                <td width="200" scope="row">
+                                <td width="400" scope="row">
                                     <p>{{ competence.name | upper}}</p>
                                 </td>
-                                <td width="200" scope="row">
+                                <td width="400" scope="row">
                                     <p></p>
                                 </td>
-                                <td width="200" scope="row">
+                                <td width="400" scope="row">
                                     <p></p>
                                 </td>
                             </tr>

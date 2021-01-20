@@ -35,27 +35,19 @@
             {% for user in users %}
             <li><a href="index.html">{{ user.Lastname }} {{ user.Firstname }}</a></li>
             {% endfor %}
-            {% comment %} <li><a href="index.html">Romuald</a></li>
-            <li><a href="index2.html">Stéphane</a></li>
-            <li><a href="index3.html">Kamel</a></li>
-            <li><a href="index.html">Pauline </a></li>
-            <li><a href="index2.html">Wilfried</a></li>
-            <li><a href="index3.html">Nicolas</a></li> {% endcomment %}
           </ul>
         </li>
          <li><a><i class="fa fa-edit"></i> MENU <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{% url 'app:Formulaire_Compétences_Collaborateur' %}">Formulaire Compétences Collaborateur</a></li>
-            {% comment %} <li><a href="{% url 'app:Profil' %}">Profil</a></li> {% endcomment %}
+            <li><a href="{% url 'app:Liste_des_utilisateurs' %}">Liste des utilisateurs</a></li>
             <li><a href="{% url 'app:Liste_des_collaborateurs' %}">Liste des collaborateurs</a></li>
-            <li><a href="{% url 'app:Supprimer_un_collaborateur' %}">Supprimer un collaborateur</a></li>
-            <li><a href="{% url 'app:Supprimer_un_utilisateur' %}">Supprimer un utilisateur</a></li>
-            <li><a href="{% url 'app:Ajouter_Domaines_Compétences' %}">Ajouter Domaines/Compétences</a></li>
             <li><a href="{% url 'app:Ajouter_un_utilisateur/collaborateur' %}">Ajouter un utilisateur / collaborateur</a></li>
-
-            {% comment %} <li><a href="{% url 'app:ListCollaboratersDelete' %}">Supprimer un collaborateur</a></li> {% endcomment %}
-
-            {% comment %} <li><a href="{% url 'app:AddUser' %}">Ajouter un compte</a></li> {% endcomment %}
+            <li><a href="{% url 'app:Liste_des_domaines' %}">Liste des domaines</a></li>
+            <li><a href="{% url 'app:Liste_des_compétences' %}">Liste des compétences</a></li>
+            <li><a href="{% url 'app:Liste_des_certifications' %}">Liste des certifications</a></li>
+            <li><a href="{% url 'app:Liste_des_sociétés' %}">Liste des sociétés</a></li>
+            <li><a href="{% url 'app:Ajouter_Domaines_Compétences' %}">Ajouter Domaines / Compétences / Certifications / Sociétés</a></li>
+            <li><a href="{% url 'app:Formulaire_Compétences_Collaborateur' %}">Formulaire Profil de Compétences Collaborateur</a></li>
           </ul>
         </li> 
         {% comment %} <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
@@ -140,7 +132,7 @@
   <!-- /sidebar menu -->
 
   <!-- /menu footer buttons -->
-  <div class="sidebar-footer hidden-small">
+  {% comment %} <div class="sidebar-footer hidden-small">
     <a data-toggle="tooltip" data-placement="top" title="Settings">
       <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
     </a>
@@ -153,6 +145,6 @@
     <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
       <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
     </a>
-  </div>
+  </div> {% endcomment %}
   <!-- /menu footer buttons -->
 </div>

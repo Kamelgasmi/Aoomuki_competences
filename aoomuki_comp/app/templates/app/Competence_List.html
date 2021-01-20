@@ -1,0 +1,39 @@
+{% extends "app/base_site.html" %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+    <div class="text-center">
+        <h1>LISTE DES COMPETENCES</h1>
+        <a href="{% url 'app:Ajouter_Domaines_Compétences' %}">Ajouter une compétence</a>
+    </div>
+        <div class="text-center text-success " >
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-title">
+            <div class="row">
+                {% for field in field %}
+                <div class="col-md-12 ">
+                    <table class="mb-5 mt-5">
+                        <h4 class="text-danger">{{ field.name}}</h4>
+                            {% for competence in competence%}
+                                {% if competence.field_id == field.id %}
+                        <tr height="50">
+                            <td width="400" scope="row">
+                                <p>{{ competence.name | upper}}</p>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

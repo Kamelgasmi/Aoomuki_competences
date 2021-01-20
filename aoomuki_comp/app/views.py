@@ -1,6 +1,6 @@
 from django.template import loader
 from django.http import HttpResponse
-from .models import * 
+from .models import *
 from .forms import AddUserForm, AddFieldForm, AddCompetenceForm, AddCertificationForm, AddSocietyForm, AddCollaboraterForm
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.db.models import Prefetch
@@ -35,28 +35,20 @@ def ListCollaboraters(request):
     }
     return render(request, 'app/Collaboraters_List.html', context)
 
-def ListCollaboratersDelete(request):
-    collaborater = Collaborater.objects.all().order_by('Lastname') #.order_by('Society')
-    context = {
-        'collaborater': collaborater,
-    }
-    return render(request, 'app/deleteCollaborater.html', context)
-
 def DeleteCollab(request, collaborater_id):
     collaborater = get_object_or_404(Collaborater, pk=collaborater_id)
     context = {
         'collaborater_id': collaborater.id,
     }
     collaborater.delete()
-    return render(request, 'app/index.html', context)
+    return render(request, 'app/Collaboraters_List', context)
 
-def ListUsersDelete(request):
+def ListUsers(request):
     users = User.objects.all().order_by('Lastname')
     context = {
         'users': users,
     }
-    return render(request, 'app/deleteUser.html', context)
-
+    return render(request, 'app/User_List.html', context)
 
 def DeleteUser(request, user_id):
     user = get_object_or_404(User, pk=user_id)
@@ -64,7 +56,7 @@ def DeleteUser(request, user_id):
         'user_id': user.id,
     }
     user.delete()
-    return render(request, 'app/index.html', context)
+    return render(request, 'app/User_List.html', context)
 
 
 # listes déroulantes issue de la bdd pour le formulaire
@@ -112,22 +104,6 @@ def Profils(request, collaborater_id):
     }
     return render(request, 'app/profil.html', context)
 
-def search(request):
-    query = request.GET.get('query')
-    if not query:
-        albums = Album.objects.all()
-    else:
-        # title contains the query is and query is not sensitive to case.
-        albums = Album.objects.filter(title__icontains=query)
-    if not albums.exists():
-        albums = Album.objects.filter(artists__name__icontains=query)
-    title = "Résultats pour la requête %s"%query
-    context = {
-        'albums': albums,
-        'title': title
-    }
-    return render(request, 'store/search.html', context)
-
 def AddUserAndCollaborater(request):
     if request.method == 'POST' and 'btnform1' in request.POST:
         form1 = AddUserForm(request.POST)
@@ -165,39 +141,65 @@ def AddUserAndCollaborater(request):
         form2 = AddCollaboraterForm()
     return render(request, 'app/formAddUser.html', {'form1': form1, "form2":form2})
 
-# def AddUserAndCollaborater(request):
-#     if request.method == 'POST':
-#         form = AddUserForm(request.POST)
-#         if form.is_valid():
-#             Lastname = form.cleaned_data['Lastname']
-#             Firstname = form.cleaned_data['Firstname']
-#             statut = form.cleaned_data['statut']
-#             login = form.cleaned_data['login']
-#             password = form.cleaned_data['password']
-#             user = User.objects.filter(Lastname=Lastname)
-#             if not user.exists():
-#                 form.save()
-#                 messages.success(request, "L'uilisateur a été ajouté")
-#                 form = AddUserForm()
-#         return render(request, 'app/formAddUser.html', {"form":form})
-#     else:
-#         # generation de la form initialement vide
-#         form = AddUserForm()
-#     # retour de la form, soit vide, soit remplie mais avec une erreur, avec un template
-#     return render(request, 'app/formAddUser.html', {'form': form})
+def ListField(request):
+    field=Field.objects.all()
+    context = {
+        'field': field,
+    }
+    return render(request, 'app/Field_List.html', context)
 
-def ListFieldCollab(request):
+# def AddField(request):
+#     field=Field.objects.all()
+#     competence=Competence.objects.all()
+#     context = {
+#         'field': field,
+#         'competence': competence,
+#     }
+#     if request.method == 'POST' and 'btnform1' in request.POST:
+#         form1 = AddFieldForm(request.POST)
+#         if form1.is_valid():
+#             name = form1.cleaned_data['name']
+#             field = Field.objects.filter(name=name)
+#             if not field.exists():
+#                 form1.save()
+#                 messages.success(request, "Le domaine a été ajouté")                
+#             return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1})
+
+#     else:
+#         form1 = AddFieldForm()
+#     return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1})
+
+def ListCompetence(request):
+    competence=Competence.objects.all()
+    field=Field.objects.all()
+    context = {
+        'competence': competence,
+        'field': field,
+
+    }
+    return render(request, 'app/Competence_List.html', context)
+
+def ListOfCertification(request):
+    certification=ListCertification.objects.all()
+    context = {
+        'certification': certification,
+    }
+    return render(request, 'app/Certification_List.html', context)
+
+def ListSociety(request):
+    society=Society.objects.all()
+    context = {
+        'society': society,
+    }
+    return render(request, 'app/Society_List.html', context)
+
+def AddFieldCompDegreeSociety(request):
     field=Field.objects.all()
     competence=Competence.objects.all()
     context = {
         'field': field,
         'competence': competence,
     }
-    return render(request, 'app/ListAddFieldCompetence.html', context)
-
-def AddField(request):
-    field=Field.objects.all()
-    competence=Competence.objects.all()
     if request.method == 'POST' and 'btnform1' in request.POST:
         form1 = AddFieldForm(request.POST)
         if form1.is_valid():
@@ -210,7 +212,7 @@ def AddField(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
+            return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
     elif request.method == 'POST' and 'btnform2' in request.POST:
         form2 = AddCompetenceForm(request.POST)
@@ -224,7 +226,7 @@ def AddField(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
+            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
     elif request.method == 'POST' and 'btnform3' in request.POST:
         form3 = AddCertificationForm(request.POST)
@@ -238,7 +240,7 @@ def AddField(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
+            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
     elif request.method == 'POST' and 'btnform4' in request.POST:
         form4 = AddSocietyForm(request.POST)
@@ -252,14 +254,14 @@ def AddField(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
+            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
     else:
         form1 = AddFieldForm()
         form2 = AddCompetenceForm()
         form3 = AddCertificationForm()
         form4 = AddSocietyForm()
-    return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
+    return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
 def search(request):
     query = request.GET.get('query')
