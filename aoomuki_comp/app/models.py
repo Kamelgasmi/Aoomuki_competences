@@ -66,14 +66,11 @@ class Competence(models.Model):
     name = models.CharField('nom', max_length=50, unique=False)
     commentary = models.CharField('commentaire', max_length=250, unique=False)
     field = models.ForeignKey(Field,on_delete=models.CASCADE, null=True, default=1)
-    # level = models.ManyToManyField(ListLevel, related_name='competences', blank=True)
-    interest = models.ManyToManyField(ListInterest, related_name='competences', blank=True)
 
     def __str__(self):
         return self.name
     class Meta:
         verbose_name = "Compétences"
-
 
 class ListWorkStation(models.Model):
     name = models.CharField('nom', max_length=50, unique=True)
@@ -88,7 +85,6 @@ class Collaborater(models.Model):
     Firstname = models.CharField('Prénom',max_length=200, unique=True)
     Extern = models.BooleanField('Externe ?',default=False)
     society = models.ForeignKey(Society,verbose_name="Société", on_delete=models.CASCADE, null=True)
-    competences = models.ManyToManyField(Competence, verbose_name="Compétence", related_name='collaboraters', blank=True)
     workstation = models.ForeignKey(ListWorkStation, verbose_name="Poste de travail", on_delete=models.CASCADE, null=True)
     certification = models.ManyToManyField(ListCertification, related_name='collaboraters', blank=True)
     statut = models.ForeignKey(Statut,on_delete=models.CASCADE, null=True)
@@ -99,6 +95,23 @@ class Collaborater(models.Model):
         return self.Lastname
     class Meta:
         verbose_name = "Collaborateurs"
+
+
+
+class ListCompetence(models.Model):
+    Collaborater = models.ForeignKey(Collaborater,on_delete=models.CASCADE, null=True, default=1)
+    ListLevel = models.ForeignKey(ListLevel,on_delete=models.CASCADE, null=True, default=1)
+    Competence = models.ForeignKey(Competence,on_delete=models.CASCADE, null=True, default=1)
+    ListInterest = models.ForeignKey(ListInterest, on_delete=models.CASCADE, null=True, default=1)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "ListCompetence"
+
+
+
+
 
 
 # class CollaboraterCompetences(models.Model):
