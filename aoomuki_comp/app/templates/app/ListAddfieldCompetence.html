@@ -14,6 +14,14 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
+                        <div>
+                            <label for="Utilisateurs">Liste:</label>
+                            <select name="Utilisateurs" > 
+                            {% for field in field %}
+                            <p>{{ field.name }}</p>
+                            {% endfor%}
+                            </select>
+                        </div>
                         <div class="x_title">
                             <h2>FORMULAIRE D'AJOUT DE DOMAINES</h2>
                         <div class="clearfix"></div>
@@ -48,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            {% comment %} <div class="row">
+            <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="x_content">
                         {% for competence in competence %}
@@ -56,7 +64,7 @@
                         {% endfor%}
                     </div>
                 </div>
-            </div> {% endcomment %}
+            </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">

@@ -1,0 +1,30 @@
+{% extends "app/base_site.html" %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="text-center">
+            <h1>LISTE DES SOCIÉTÉS</h1>
+            <a href="{% url 'app:Ajouter_Domaines_Compétences' %}">Ajouter un domaine</a>
+        </div>
+        <div class="text-center text-success " >
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-title">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <table class="mb-5 mt-5">
+                        {% for society in society%}
+                            <p>{{ society.name | upper}}</p>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
