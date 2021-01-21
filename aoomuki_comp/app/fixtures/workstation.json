@@ -3,7 +3,7 @@
         "model": "app.listworkstation",
         "pk": 1,
         "fields": {
-          "name": "developpeur",
+          "name": "Développeur",
           "commentary": "developpeur"
       }
     },
@@ -11,7 +11,7 @@
       "model": "app.listworkstation",
       "pk": 2,
       "fields": {
-        "name": "designer",
+        "name": "Designer",
         "commentary": "designer"
       }
     },
@@ -19,7 +19,7 @@
         "model": "app.listworkstation",
         "pk": 3,
         "fields": {
-          "name": "manager",
+          "name": "Manager",
           "commentary": "manager"
         }
       },
@@ -27,7 +27,7 @@
         "model": "app.listworkstation",
         "pk": 4,
         "fields": {
-          "name": "directeur",
+          "name": "Directeur",
           "commentary": "directeur"
         }
       },
@@ -35,7 +35,7 @@
         "model": "app.listworkstation",
         "pk": 5,
         "fields": {
-          "name": "responsable",
+          "name": "Responsable",
           "commentary": "responsable"
         }
       },
@@ -43,7 +43,7 @@
         "model": "app.listworkstation",
         "pk": 6,
         "fields": {
-          "name": "RH",
+          "name": "Ressources humaines",
           "commentary": "RH"
         }
       },
@@ -51,7 +51,7 @@
         "model": "app.listworkstation",
         "pk": 7,
         "fields": {
-          "name": "stagiaire",
+          "name": "Stagiaire",
           "commentary": "stagiaire"
         }
       },
@@ -59,7 +59,7 @@
         "model": "app.listworkstation",
         "pk": 8,
         "fields": {
-          "name": "administration",
+          "name": "Administration",
           "commentary": "administration"
         }
       }

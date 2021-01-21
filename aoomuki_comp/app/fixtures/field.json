@@ -11,7 +11,7 @@
       "model": "app.field",
       "pk": 2,
       "fields": {
-        "name": "language",
+        "name": "LANGAGE",
         "description": "language"
       }
     },
@@ -25,17 +25,9 @@
       },
       {
         "model": "app.field",
-        "pk": 4,
-        "fields": {
-          "name": "transverse_comp",
-          "description": "transverse_comp"
-        }
-      },
-      {
-        "model": "app.field",
         "pk": 5,
         "fields": {
-          "name": "frameworks",
+          "name": "FRAMEWORKS",
           "description": "frameworks"
         }
       },
@@ -43,7 +35,7 @@
         "model": "app.field",
         "pk": 6,
         "fields": {
-          "name": "MA",
+          "name": "MARKETING",
           "description": "MA"
         }
       },
@@ -51,7 +43,7 @@
         "model": "app.field",
         "pk": 7,
         "fields": {
-          "name": "Qualité",
+          "name": "QUALITE",
           "description": "Qualité"
         }
       },
@@ -59,7 +51,7 @@
         "model": "app.field",
         "pk": 8,
         "fields": {
-          "name": "gestion de projet",
+          "name": "GESTION DE PROJET",
           "description": "gestionM de projet"
         }
       },
@@ -67,7 +59,7 @@
         "model": "app.field",
         "pk": 9,
         "fields": {
-          "name": "documentation",
+          "name": "DOCUMENTATION",
           "description": "documentation"
         }
       },
@@ -75,7 +67,7 @@
         "model": "app.field",
         "pk": 10,
         "fields": {
-          "name": "design",
+          "name": "DESIGN",
           "description": "design"
         }
       }

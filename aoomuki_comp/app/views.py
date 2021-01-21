@@ -84,6 +84,10 @@ def Profils(request, collaborater_id):
     collaborater = get_object_or_404(Collaborater.objects.prefetch_related(Prefetch('competences', queryset=Competence.objects.only('name', 'field').all()), Prefetch('certification', queryset=ListCertification.objects.only('name').all())), pk=collaborater_id)
 
     # competence = get_object_or_404(Competence.objects.prefetch_related(Prefetch('interest', queryset=ListInterest.objects.only('value').all())))
+    # # competence = get_object_or_404(Competence.objects.prefetch_related(Prefetch('interest', queryset=ListInterest.objects.only('value').all())))
+    # listcompetence = ListofCompetence.objects.all()
+    # competences = [competence.Competence_id for competence in listcompetence.competences.all()]
+    # competences_id = " ".join(competences)
 
     # collaborater = get_object_or_404(Collaborater, pk=collaborater_id)
     # competences = [competence.name for competence in collaborater.competences.all()]
