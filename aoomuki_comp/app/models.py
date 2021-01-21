@@ -97,7 +97,6 @@ class Collaborater(models.Model):
         verbose_name = "Collaborateurs"
 
 
-
 class ListCompetence(models.Model):
     Collaborater = models.ForeignKey(Collaborater,on_delete=models.CASCADE, null=True, default=1)
     ListLevel = models.ForeignKey(ListLevel,on_delete=models.CASCADE, null=True, default=1)
