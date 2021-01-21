@@ -109,10 +109,6 @@ class ListCompetence(models.Model):
         verbose_name = "ListCompetence"
 
 
-
-
-
-
 # class CollaboraterCompetences(models.Model):
 
 #     class Meta:
