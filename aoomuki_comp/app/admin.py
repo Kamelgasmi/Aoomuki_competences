@@ -5,7 +5,10 @@ from .models import User, Collaborater, Field, Competence, ListLevel, ListIntere
 
 
 
-admin.site.register(Competence)
+@admin.register(Competence)
+class CompetenceAdmin(admin.ModelAdmin):
+    pass
+
 class CompetenceInline(admin.TabularInline):
     model = Competence
     fieldsets = [
@@ -35,17 +38,14 @@ class ListofCompetenceInline(admin.TabularInline):
 @admin.register(ListLevel)
 class ListLevelAdmin(admin.ModelAdmin):
     pass
-    # inlines = [ListofCompetenceInline,] # list of bookings made by a contact
 
 @admin.register(ListInterest)
 class ListInterestAdmin(admin.ModelAdmin):
     pass
-    # inlines = [ListofCompetenceInline,] # list of bookings made by a contact
 
 @admin.register(ListWorkStation)
 class ListWorkStationAdmin(admin.ModelAdmin):
     pass
-    # inlines = [ListofCompetenceInline,] # list of bookings made by a contact
 
 @admin.register(ListCertification)
 class ListCertificationAdmin(admin.ModelAdmin):
