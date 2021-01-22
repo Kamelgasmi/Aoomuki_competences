@@ -82,7 +82,7 @@ def AllFormlist(request):
 def Profils(request, collaborater_id):
     field=Field.objects.all()
     collaborater = get_object_or_404(Collaborater.objects.prefetch_related(Prefetch('certification', queryset=ListCertification.objects.only('name').all())), pk=collaborater_id)
-    listcompetence = CollaboraterCompetence.objects.all()
+    listcompetence = ListofCompetence.objects.all()
     competence=Competence.objects.all()
     level=ListLevel.objects.all()
     interest=ListInterest.objects.all()

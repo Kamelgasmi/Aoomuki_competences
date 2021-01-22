@@ -21,7 +21,7 @@ class User(models.Model):
     def __str__(self):
         return self.Lastname + " " + self.Firstname
     class Meta:
-        verbose_name = "Utilisateurs"
+        verbose_name = "Utilisateur"
 
 class Society(models.Model):
     name = models.CharField('Société', max_length=200, unique=True)
@@ -35,7 +35,7 @@ class ListCertification(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name = "Certifications"
+        verbose_name = "Certification"
 
 
 class Field(models.Model):
@@ -60,7 +60,7 @@ class ListInterest(models.Model):
     def __str__(self):
         return self.value
     class Meta:
-        verbose_name = "Liste des intérêts"
+        verbose_name = "Liste des intérêt"
         
 class Competence(models.Model):
     name = models.CharField('nom', max_length=50, unique=False)
@@ -70,7 +70,7 @@ class Competence(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name = "Compétences"
+        verbose_name = "Compétence"
 
 class ListWorkStation(models.Model):
     name = models.CharField('nom', max_length=50, unique=True)
@@ -93,19 +93,19 @@ class Collaborater(models.Model):
     def __str__(self):
         return self.Lastname
     class Meta:
-        verbose_name = "Collaborateurs"
+        verbose_name = "Collaborateur"
 
 
-class CollaboraterCompetence(models.Model):
+class ListofCompetence(models.Model):
     Collaborater = models.ForeignKey(Collaborater,on_delete=models.CASCADE, null=True, default=1)
     Competence = models.ForeignKey(Competence,on_delete=models.CASCADE, null=True, default=1)
     ListInterest = models.ForeignKey(ListInterest, on_delete=models.CASCADE, null=True, default=1)
     ListLevel = models.ForeignKey(ListLevel,on_delete=models.CASCADE, null=True, default=1)
 
     def __str__(self):
-        return self.name
+        return str(self.Collaborater)
     class Meta:
-        verbose_name = "ListCompetence"
+        verbose_name = "Collaborateurs / Competence"
 
 
 # class CollaboraterCompetences(models.Model):
