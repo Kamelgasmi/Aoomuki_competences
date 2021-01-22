@@ -89,7 +89,6 @@ class Collaborater(models.Model):
     certification = models.ManyToManyField(ListCertification, related_name='collaboraters', blank=True)
     statut = models.ForeignKey(Statut,on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True)
-    # interest = models.ManyToManyField(ListInterest, related_name='collaboraters', blank=True)
 
     def __str__(self):
         return self.Lastname

@@ -33,6 +33,7 @@
                 </div>
                 <div class="row">
                     {% for field in field %}
+
                     <div class="col-md-12 ">
                         <table class="mb-5 mt-5">
                             <h4 class="text-danger">{{ field.name}}</h4>
@@ -41,21 +42,36 @@
                                 <th class="text-warning" scope="col">Niveau</th>
                                 <th class="text-warning" scope="col">Intérêt</th>
                             </tr>
-                                {% for competence in collaborater.competences.all%}
-                                    {% if competence.field_id == field.id %}
-                            <tr height="50">
-                                <td width="400" scope="row">
-                                    <p>{{ competence.name | upper}}</p>
-                                </td>
-                                <td width="400" scope="row">
-                                    <p></p>
-                                </td>
-                                <td width="400" scope="row">
-                                    <p></p>
-                                </td>
-                            </tr>
-                            {% endif %}
-                            {% endfor %}
+                                {% for listcompetence in listcompetence%}
+                                {% if listcompetence.Collaborater_id == collaborater.id %}
+                                {% for competence in competence%}
+                                {% if competence.field_id == field.id %}
+                                {% if listcompetence.Competence_id == competence.id %}
+                                {% for level in level%}
+                                {% if listcompetence.ListLevel_id == level.id %}
+                                {% for interest in interest%}
+                                {% if listcompetence.ListInterest_id == interest.id %}
+                                    <tr height="50">
+                                        <td width="400" scope="row">
+                                            <p>{{ competence.name }}</p>
+                                        </td>
+                                        <td width="200" scope="row">
+                                            <p>{{ level.value }}</p>
+                                        </td>
+                                        <td width="400" scope="row">
+                                            <p>{{ interest.value }}</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+
                         </table>
                     </div>
                     {% endfor %}
@@ -80,3 +96,26 @@
 
     {% comment %} <p>{{ interest_name }}</p> {% endcomment %}
 {% comment %} {% endfor%} {% endcomment %}
+
+
+
+
+{% comment %} {% for listcompetence in listcompetence%}
+                                    {% for competence in competence%}
+                                        {% if listcompetence.Collaborater_id == collaborater.id %}
+                                            {% if listcompetence.Competence_id == competence.id %}
+                                            {% if listcompetence.ListInterest_id == ListInterest.id %}
+                                            {% if listcompetence.ListLevel_id == ListLevel.id %}
+
+                                                {% if competence.field_id == field.id %}
+                                                <tr height="50">
+                                                    <td width="400" scope="row">
+                                                        <p>{{ competence.name }}</p>
+                                                    </td>
+                                                    <td width="400" scope="row">
+                                                        <p{{ ListInterest.value }}></p>
+                                                    </td>
+                                                    <td width="400" scope="row">
+                                                        <p>{{ ListLevel.value }}</p>
+                                                    </td>
+                                                </tr> {% endcomment %}

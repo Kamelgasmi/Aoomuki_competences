@@ -10,10 +10,10 @@ from django.contrib.messages import success
 
 
 def index(request):
-    users = User.objects.all()
-    context = { 'users':users}
-    template = loader.get_template('app/index.html')
-    return HttpResponse(template.render(context, request))
+    # users = User.objects.all()
+    # context = { 'users':users}
+    template = loader.get_template('app/login.html')
+    return HttpResponse(template.render({}, request))
 
 
 def gentella_html(request):
@@ -81,30 +81,18 @@ def AllFormlist(request):
 
 def Profils(request, collaborater_id):
     field=Field.objects.all()
-    collaborater = get_object_or_404(Collaborater.objects.prefetch_related(Prefetch('competences', queryset=Competence.objects.only('name', 'field').all()), Prefetch('certification', queryset=ListCertification.objects.only('name').all())), pk=collaborater_id)
-
-    # competence = get_object_or_404(Competence.objects.prefetch_related(Prefetch('interest', queryset=ListInterest.objects.only('value').all())))
-    # # competence = get_object_or_404(Competence.objects.prefetch_related(Prefetch('interest', queryset=ListInterest.objects.only('value').all())))
-    # listcompetence = ListofCompetence.objects.all()
-    # competences = [competence.Competence_id for competence in listcompetence.competences.all()]
-    # competences_id = " ".join(competences)
-
-    # collaborater = get_object_or_404(Collaborater, pk=collaborater_id)
-    # competences = [competence.name for competence in collaborater.competences.all()]
-    # competences_name = " ".join(competences)
-
-    # collaborater = Collaborater.objects.all().values('Lastname','Firstname', 'Society', 'competences__name', 'id') 
+    collaborater = get_object_or_404(Collaborater.objects.prefetch_related(Prefetch('certification', queryset=ListCertification.objects.only('name').all())), pk=collaborater_id)
+    listcompetence = ListofCompetence.objects.all()
+    competence=Competence.objects.all()
+    level=ListLevel.objects.all()
+    interest=ListInterest.objects.all()
     context = {
         'collaborater':collaborater,
         'field':field,
-
-        # 'competence':competence,
-        # 'collaborater_lastname': collaborater.Lastname,
-        # 'collaborater_firstname': collaborater.Firstname,
-        # 'collaborater_society': collaborater.Society,
-        # 'competences_name': competences_name,
-        # 'interests_value': interests.value,
-
+        'listcompetence':listcompetence,
+        'competence':competence,
+        'level':level,
+        'interest':interest
     }
     return render(request, 'app/profil.html', context)
 
@@ -124,7 +112,7 @@ def AddUserAndCollaborater(request):
                 form1 = AddUserForm()
                 form2 = AddCollaboraterForm()
         return render(request, 'app/formAddUser.html', {"form1":form1, "form2":form2})
-#*************************************************FAIRE LE 2EME FORMULAIRE DANS CETTE FONCTION************************************************************************
+
     if request.method == 'POST' and 'btnform2' in request.POST:
         form2 = AddCollaboraterForm(request.POST)
         if form2.is_valid():
