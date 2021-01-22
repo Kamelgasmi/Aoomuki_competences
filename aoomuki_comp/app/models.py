@@ -96,7 +96,7 @@ class Collaborater(models.Model):
         verbose_name = "Collaborateurs"
 
 
-class ListofCompetence(models.Model):
+class CollaboraterCompetence(models.Model):
     Collaborater = models.ForeignKey(Collaborater,on_delete=models.CASCADE, null=True, default=1)
     Competence = models.ForeignKey(Competence,on_delete=models.CASCADE, null=True, default=1)
     ListInterest = models.ForeignKey(ListInterest, on_delete=models.CASCADE, null=True, default=1)
