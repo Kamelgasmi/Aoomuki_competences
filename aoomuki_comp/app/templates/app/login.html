@@ -1,4 +1,4 @@
-{% extends "app/base_site.html" %}
+ {% extends "app/base_site.html" %}
 
 {% block title %} Login {% endblock title %}
 
@@ -16,13 +16,14 @@
     <div class="login_wrapper">
       <div class="animate form login_form">
         <section class="login_content">
-          <form method="post" novalidate>
+          <form method="post" >
+          {% csrf_token %}
             <h1>Connexion</h1>
             <div>
-              <input type="text" class="form-control" placeholder="Login" required="" />
+              <input type="text" class="form-control" name="login" placeholder="Login" required="" />
             </div>
             <div>
-              <input type="password" class="form-control" placeholder="Password" required="" />
+              <input type="password" class="form-control" name="password" placeholder="Password" required="" />
             </div>
             <div>
               <a class="btn btn-default submit" href="app/index.html">Connexion</a>
@@ -83,5 +84,5 @@
       </div>
     </div>
   </div>
-{% endblock body %}
+{% endblock body %} 
 

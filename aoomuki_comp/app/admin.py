@@ -9,6 +9,11 @@ from .models import User, Collaborater, Field, Competence, ListLevel, ListIntere
 class CompetenceAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Collaborater)
+class CollaboraterAdmin(admin.ModelAdmin):
+    search_fields = ['Lastname', 'Firstname']
+    pass
+
 class CompetenceInline(admin.TabularInline):
     model = Competence
     fieldsets = [

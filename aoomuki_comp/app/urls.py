@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from app import views
-from django.contrib.auth import views as authview, authenticate
+from django.contrib.auth import views as auth_views, authenticate
 from django.contrib.auth.decorators import login_required
 app_name = 'app'
 
@@ -12,6 +12,10 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='index'),
+    # path("logout", views.logout_request, name="logout"),
+    # path("login", views.login_request, name="login"),
+      # path('login/', views.loginPage, name="login"),  
+	# path('logout/', views.logoutUser, name="logout"),
     # path('login/',authview.LoginView.as_view(template_name="Registration/login.html")),
     # path('logout/',authview.LogoutView.as_view(template_name="backoffice/logout.html")),
     path('Formulaire_Compétences_Collaborateur/', views.AllFormlist, name='Formulaire_Compétences_Collaborateur'),

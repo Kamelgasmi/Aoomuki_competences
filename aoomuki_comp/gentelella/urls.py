@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # url(r'^', include("django.contrib.auth.urls")), 
     # path('accounts/', include('django.contrib.auth.urls')),
     # path('', TemplateView.as_view(template_name='app/index.html'), name='index'),     # app/ -> Genetelella UI and resources
 
