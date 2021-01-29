@@ -121,7 +121,7 @@ def AddCompetenceCollab(request, user_id):
     #         return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
     else:
-        form1 = AddFieldForm()
+        form1 = AddCompCollabForm()
     return render(request, 'app/formAddCompetenceCollab.html', {'form1': form1}, context)
 
 
