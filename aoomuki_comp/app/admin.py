@@ -1,7 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-from .models import User, Collaborater, Field, Competence, ListLevel, ListInterest, ListWorkStation, ListCertification, Statut, Society, ListofCompetence
+from .models import Collaborater, Field, Competence, ListLevel, ListInterest, ListWorkStation, ListCertification, Statut, Society, ListofCompetence
 
 
 
@@ -11,6 +9,7 @@ class CompetenceAdmin(admin.ModelAdmin):
 
 @admin.register(Collaborater)
 class CollaboraterAdmin(admin.ModelAdmin):
+    list_display = ('Lastname', 'Firstname', 'society', 'user')
     search_fields = ['Lastname', 'Firstname']
     pass
 
@@ -30,9 +29,9 @@ class CollaboraterInline(admin.TabularInline):
         (None, {'fields': ['Lastname', 'Firstname','Extern', 'society','workstation', 'statut',]})
         ] # list columns
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    inlines = [CollaboraterInline,] # list of bookings made by a contact
+# @admin.register(User)
+# class UserAdmin(admin.ModelAdmin):
+#     inlines = [CollaboraterInline,] # list of bookings made by a contact
 
 class ListofCompetenceInline(admin.TabularInline):
     model = ListofCompetence
@@ -66,4 +65,5 @@ class SocietyAdmin(admin.ModelAdmin):
 
 @admin.register(ListofCompetence)
 class ListofCompetenceAdmin(admin.ModelAdmin):
+    list_display = ('Collaborater', 'Competence', 'ListLevel', 'ListInterest')
     pass

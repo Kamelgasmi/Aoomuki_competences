@@ -1,0 +1,26 @@
+{% extends "app/base_site.html" %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="text-center text-success " >
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3>{{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            </div> 
+            <div class="" >
+                <h1>Creer un compte</h1>
+                    <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <button>Register</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

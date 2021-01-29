@@ -1,0 +1,19 @@
+{% extends 'app/base_site.html' %}
+
+{% block content %} 
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="">
+                <div class="x_content"> 
+                    <form method="POST" class="post-form" >{% csrf_token %}
+                        {{ form1.as_ul }}
+                        <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} 

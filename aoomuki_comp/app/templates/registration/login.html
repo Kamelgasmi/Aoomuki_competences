@@ -1,0 +1,35 @@
+{% extends "app/base_site2.html" %}
+
+{% block title %} Login {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Animate.css -->
+  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="text-center"><h1>MATRICE DES COMPÉTENCES</h1></div>
+          <div class="login_wrapper">
+            <div class="animate form login_form">
+              <section class="login_content">
+                <h1>CONNEXION</h1>
+                  <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <button>Login</button>
+                  </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %} 
+

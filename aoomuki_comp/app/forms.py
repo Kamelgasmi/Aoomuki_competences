@@ -1,8 +1,9 @@
 from django.forms import ModelForm, TextInput, EmailInput, FileInput, PasswordInput, Select, CheckboxInput
 from django.forms.utils import ErrorList
 from django import forms
-from .models import User, Field, Competence, ListCertification, Society, Collaborater
-
+from .models import Field, Competence, ListCertification, Society, Collaborater, ListofCompetence
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 # class ParagraphErrorList(ErrorList):
 #     def __str__(self):
@@ -11,17 +12,17 @@ from .models import User, Field, Competence, ListCertification, Society, Collabo
 #         if not self: return ''
 #         return '<div class="errorlist">%s</div>' % ''.join(['<p class="small error">%s</p>' % e for e in self])
 
-class AddUserForm(ModelForm):
+class AddUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["Lastname", "Firstname", "statut", "login", "password"]
-        widgets = {
-            'Lastname': TextInput(attrs={'class': 'form-control'}),
-            'Firstname': TextInput(attrs={'class': 'form-control'}),
-            'statut':Select(attrs={'class': 'form-control'}),
-            'login': TextInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput()
-        }
+        fields = ["last_name", "first_name", "username"]
+        # widgets = {
+        #     'Lastname': TextInput(attrs={'class': 'form-control'}),
+        #     'Firstname': TextInput(attrs={'class': 'form-control'}),
+        #     'statut':Select(attrs={'class': 'form-control'}),
+        #     'login': TextInput(attrs={'class': 'form-control'}),
+        #     'password': forms.PasswordInput()
+        # }
 
 class AddCollaboraterForm(ModelForm):
     class Meta:
@@ -36,6 +37,16 @@ class AddCollaboraterForm(ModelForm):
             'Extern':CheckboxInput(attrs={'class': 'form-control'}),
             'user':Select(attrs={'class': 'form-control'}),
 
+        }
+
+class AddCompCollabForm(ModelForm):
+    class Meta:
+        model = ListofCompetence
+        fields = ["Competence", "ListInterest", "ListLevel"]
+        widgets = {
+            'Competence': TextInput(attrs={'class': 'form-control'}),
+            'ListInterest': Select(attrs={'class': 'form-control'}),
+            'ListLevel':Select(attrs={'class': 'form-control'}),
         }
 
 class AddFieldForm(ModelForm):

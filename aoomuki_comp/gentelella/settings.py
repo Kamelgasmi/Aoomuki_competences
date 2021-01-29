@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'app'
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,5 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'app:index'
 
+LOGIN_URL = 'app:login'
+
+LOGOUT_URL = 'app:logout'

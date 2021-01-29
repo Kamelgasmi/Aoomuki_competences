@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
+
 from django.db import models
 
 # Create your models here.
@@ -12,16 +13,16 @@ class Statut(models.Model):
     class Meta:
         verbose_name = "Statut"
 
-class User(models.Model):
-    Lastname = models.CharField('nom',max_length=200, unique=True)
-    Firstname = models.CharField('prénom',max_length=200, unique=True)
-    statut = models.ForeignKey(Statut,on_delete=models.CASCADE, null=True)
-    login = models.CharField('login',max_length=200, unique=True)
-    password = models.CharField(max_length=50)
-    def __str__(self):
-        return self.Lastname + " " + self.Firstname
-    class Meta:
-        verbose_name = "Utilisateur"
+# class User(models.Model):
+#     Lastname = models.CharField('nom',max_length=200, unique=True)
+#     Firstname = models.CharField('prénom',max_length=200, unique=True)
+#     statut = models.ForeignKey(Statut,on_delete=models.CASCADE, null=True)
+#     login = models.CharField('login',max_length=200, unique=True)
+#     password = models.CharField(max_length=50)
+#     def __str__(self):
+#         return self.Lastname + " " + self.Firstname
+#     class Meta:
+#         verbose_name = "Utilisateur"
 
 class Society(models.Model):
     name = models.CharField('Société', max_length=200, unique=True)
@@ -88,7 +89,7 @@ class Collaborater(models.Model):
     workstation = models.ForeignKey(ListWorkStation, verbose_name="Poste de travail", on_delete=models.CASCADE, null=True)
     certification = models.ManyToManyField(ListCertification, related_name='collaboraters', blank=True)
     statut = models.ForeignKey(Statut,on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True, blank=True, unique=True)
 
     def __str__(self):
         return self.Lastname

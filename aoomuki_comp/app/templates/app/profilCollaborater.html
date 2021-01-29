@@ -1,0 +1,85 @@
+{% extends 'app/base_site.html' %}
+
+{% block content %} 
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="">
+            {% if user.is_authenticated%}
+                {% for collaborater in collaborater %}
+                    {% if collaborater.user_id == user.id%}
+                <div class="col-12 text-center">
+                    <h1>{{ collaborater.Lastname }} {{ collaborater.Firstname }} ({{ collaborater.statut.name }})</h1>
+                    <h2>{{ collaborater.society.name }}</h2>
+                    <h2>{{ collaborater.workstation.name }}</h2>
+                </div>
+                <div class="row border border-success">
+                    <div class="col-md-12 text-center text-danger ">
+                        <h3>CERTIFICATIONS</h3>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-12 text-center ">
+                        {% for certification in collaborater.certification.all %}
+                        <li>{{ certification.name}}</li>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-12 text-center text-danger ">
+                        <h3>DOMAINES / COMPÉTENCES</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for field in field %}
+
+                    <div class="col-md-12 ">
+                        <table class="mb-5 mt-5">
+                            <h4 class="text-danger">{{ field.name}}</h4>
+                            <tr>
+                                <th class="text-warning" scope="col">Compétence</th>
+                                <th class="text-warning" scope="col">Niveau</th>
+                                <th class="text-warning" scope="col">Intérêt</th>
+                            </tr>
+                                {% for listcompetence in listcompetence%}
+                                {% if listcompetence.Collaborater_id == collaborater.id %}
+                                {% for competence in competence%}
+                                {% if competence.field_id == field.id %}
+                                {% if listcompetence.Competence_id == competence.id %}
+                                {% for level in level%}
+                                {% if listcompetence.ListLevel_id == level.id %}
+                                {% for interest in interest%}
+                                {% if listcompetence.ListInterest_id == interest.id %}
+                                    <tr height="50">
+                                        <td width="400" scope="row">
+                                            <p>{{ competence.name }}</p>
+                                        </td>
+                                        <td width="200" scope="row">
+                                            <p>{{ level.value }}</p>
+                                        </td>
+                                        <td width="400" scope="row">
+                                            <p>{{ interest.value }}</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+
+                        </table>
+                    </div>
+                    {% endfor %}
+                </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

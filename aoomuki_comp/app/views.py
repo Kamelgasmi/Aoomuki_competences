@@ -1,21 +1,22 @@
 from django.template import loader
 from django.http import HttpResponse
 from .models import *
-from .forms import AddUserForm, AddFieldForm, AddCompetenceForm, AddCertificationForm, AddSocietyForm, AddCollaboraterForm
+from .forms import AddUserForm, AddFieldForm, AddCompetenceForm, AddCertificationForm, AddSocietyForm, AddCollaboraterForm, AddCompCollabForm
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.db.models import Prefetch
 from django.contrib import messages
 from django.contrib.messages import success
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth import login, authenticate
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
-# from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.decorators import login_required
-
-
+@login_required
 def index(request):
     # users = User.objects.all()
     # context = { 'users':users}
-    template = loader.get_template('app/login.html')
+    template = loader.get_template('app/index.html')
     return HttpResponse(template.render({}, request))
 
 
@@ -31,6 +32,7 @@ def gentella_html(request):
 
 
 #liste des collaborateurs
+@login_required
 def ListCollaboraters(request):
     collaborater = Collaborater.objects.all().order_by('Lastname') #.order_by('Society')
     context = {
@@ -38,21 +40,24 @@ def ListCollaboraters(request):
     }
     return render(request, 'app/Collaboraters_List.html', context)
 
+@login_required
 def DeleteCollab(request, collaborater_id):
     collaborater = get_object_or_404(Collaborater, pk=collaborater_id)
     context = {
         'collaborater_id': collaborater.id,
     }
     collaborater.delete()
-    return render(request, 'app/Collaboraters_List', context)
+    return render(request, 'app/Collaboraters_List.html', context)
 
+@login_required
 def ListUsers(request):
-    users = User.objects.all().order_by('Lastname')
+    users = User.objects.all()
     context = {
         'users': users,
     }
     return render(request, 'app/User_List.html', context)
 
+@login_required
 def DeleteUser(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {
@@ -63,6 +68,7 @@ def DeleteUser(request, user_id):
 
 
 # listes déroulantes issue de la bdd pour le formulaire
+@login_required
 def AllFormlist(request): 
     field=Field.objects.all()
     level=ListLevel.objects.all()
@@ -79,8 +85,91 @@ def AllFormlist(request):
     resultsStatut=Statut.objects.all()
     return render(request, "app/form.html",{"showStatut":resultsStatut, "showSociety":resultsSociety, "showComp":resultsComp, "showCertification":resultsCertification, "showCollab":resultsCollaborater, "showWorkStation":resultsWorkStation, "showField":resultsField, "showLevel":resultsLevel, "showInterest":resultsInterest, "showUser":resultsUser, "fields":field, "showLevel":level, "showInterest":interest})
 
+def AddCompetenceCollab(request, user_id):
+    field=Field.objects.all()
+    user=get_object_or_404(User,pk=user_id)
+    collaborater =Collaborater.objects.all()
+    context = {
+        'field': field,
+        'user': user,
+        'collaborater': collaborater,
+    }
+    if request.method == 'POST' and 'btnform1' in request.POST:
+        form1 = AddCompCollabForm(request.POST)
+        if form1.is_valid():
+            # competence = form1.cleaned_data['Competence']
+            # interest = form1.cleaned_data['ListInterest']
+            # level = form1.cleaned_data['ListLevel']
+            form1.save()
+            messages.success(request, "Les compétences ont été ajoutées")
+            form1 = AddCompCollabForm()
+            # form2 = AddCompetenceForm()
+        return render(request, 'app/formAddCompetenceCollab.html', {'form1': form1}, context)
+
+    # elif request.method == 'POST' and 'btnform2' in request.POST:
+    #     form2 = AddCompetenceForm(request.POST)
+    #     if form2.is_valid():
+    #         name = form2.cleaned_data['name']
+    #         competence = Competence.objects.filter(name=name)
+    #         if not competence.exists():
+    #             form2.save()
+    #             messages.success(request, "La compétence a été ajoutée")
+    #             form1 = AddFieldForm()
+    #             form2 = AddCompetenceForm()
+    #             form3 = AddCertificationForm()
+    #             form4 = AddSocietyForm()
+    #         return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+
+    else:
+        form1 = AddFieldForm()
+    return render(request, 'app/formAddCompetenceCollab.html', {'form1': form1}, context)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@login_required
 def Profils(request, collaborater_id):
     field=Field.objects.all()
     collaborater = get_object_or_404(Collaborater.objects.prefetch_related(Prefetch('certification', queryset=ListCertification.objects.only('name').all())), pk=collaborater_id)
@@ -98,23 +187,28 @@ def Profils(request, collaborater_id):
     }
     return render(request, 'app/profil.html', context)
 
-def AddUserAndCollaborater(request):
-    if request.method == 'POST' and 'btnform1' in request.POST:
-        form1 = AddUserForm(request.POST)
-        if form1.is_valid():
-            Lastname = form1.cleaned_data['Lastname']
-            Firstname = form1.cleaned_data['Firstname']
-            statut = form1.cleaned_data['statut']
-            login = form1.cleaned_data['login']
-            password = form1.cleaned_data['password']
-            user = User.objects.filter(Lastname=Lastname)
-            if not user.exists():
-                form1.save()
-                messages.success(request, "L'utilisateur a été ajouté")
-                form1 = AddUserForm()
-                form2 = AddCollaboraterForm()
-        return render(request, 'app/formAddUser.html', {"form1":form1, "form2":form2})
+@login_required
+def CollaboraterProfil(request, user_id):
+    field=Field.objects.all()
+    user=get_object_or_404(User,pk=user_id)
+    collaborater =Collaborater.objects.all()
+    listcompetence = ListofCompetence.objects.all()
+    competence=Competence.objects.all()
+    level=ListLevel.objects.all()
+    interest=ListInterest.objects.all()
+    context = {
+        'user':user,
+        'collaborater':collaborater,
+        'field':field,
+        'listcompetence':listcompetence,
+        'competence':competence,
+        'level':level,
+        'interest':interest
+    }
+    return render(request, 'app/profilCollaborater.html', context)
 
+@login_required
+def AddCollaborater(request):
     if request.method == 'POST' and 'btnform2' in request.POST:
         form2 = AddCollaboraterForm(request.POST)
         if form2.is_valid():
@@ -127,14 +221,25 @@ def AddUserAndCollaborater(request):
             if not collaborater.exists():
                 form2.save()
                 messages.success(request, "Le collaborateur a été ajouté")
-                form1 = AddUserForm()
                 form2 = AddCollaboraterForm()
-            return render(request, 'app/formAddUser.html', {"form1":form1, "form2":form2})            
+            return render(request, 'app/formAddUser.html', {"form2":form2})            
     else:
-        form1 = AddUserForm()
         form2 = AddCollaboraterForm()
-    return render(request, 'app/formAddUser.html', {'form1': form1, "form2":form2})
+    return render(request, 'app/formAddUser.html', {'form2': form2})
 
+@login_required
+def register(request):
+    if request.method == 'POST':
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "L'utilisateur a été ajouté")
+            return redirect(request, 'registration/register.html', {"form":form})
+    else:
+        form = AddUserForm(request.POST)
+    return render(request, 'registration/register.html', {"form":form})
+
+@login_required
 def ListField(request):
     field=Field.objects.all()
     context = {
@@ -162,7 +267,7 @@ def ListField(request):
 #     else:
 #         form1 = AddFieldForm()
 #     return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1})
-
+@login_required
 def ListCompetence(request):
     competence=Competence.objects.all()
     field=Field.objects.all()
@@ -173,6 +278,7 @@ def ListCompetence(request):
     }
     return render(request, 'app/Competence_List.html', context)
 
+@login_required
 def ListOfCertification(request):
     certification=ListCertification.objects.all()
     context = {
@@ -180,6 +286,7 @@ def ListOfCertification(request):
     }
     return render(request, 'app/Certification_List.html', context)
 
+@login_required
 def ListSociety(request):
     society=Society.objects.all()
     context = {
@@ -187,6 +294,7 @@ def ListSociety(request):
     }
     return render(request, 'app/Society_List.html', context)
 
+@login_required
 def AddFieldCompDegreeSociety(request):
     field=Field.objects.all()
     competence=Competence.objects.all()
@@ -257,6 +365,7 @@ def AddFieldCompDegreeSociety(request):
         form4 = AddSocietyForm()
     return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
 
+@login_required
 def search(request):
     query = request.GET.get('query')
     if not query:

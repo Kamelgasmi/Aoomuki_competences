@@ -1,7 +1,9 @@
 from django.urls import path, re_path
 from app import views
-from django.contrib.auth import views as auth_views, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
+# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
+
 app_name = 'app'
 
 urlpatterns = [
@@ -12,14 +14,11 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='index'),
-    # path("logout", views.logout_request, name="logout"),
-    # path("login", views.login_request, name="login"),
-      # path('login/', views.loginPage, name="login"),  
-	# path('logout/', views.logoutUser, name="logout"),
-    # path('login/',authview.LoginView.as_view(template_name="Registration/login.html")),
-    # path('logout/',authview.LogoutView.as_view(template_name="backoffice/logout.html")),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('Enregistrement/', views.register, name='Enregistrement'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='app:login'), name='logout'),
     path('Formulaire_Compétences_Collaborateur/', views.AllFormlist, name='Formulaire_Compétences_Collaborateur'),
-    path('Ajouter_un_utilisateur/collaborateur', views.AddUserAndCollaborater, name='Ajouter_un_utilisateur/collaborateur'),
+    path('Ajouter_un_utilisateur/collaborateur', views.AddCollaborater, name='Ajouter_un_utilisateur/collaborateur'),
     path('search/', views.search, name='search'),
     path('Liste_des_collaborateurs/', views.ListCollaboraters, name='Liste_des_collaborateurs'),
     path('Liste_des_utilisateurs/', views.ListUsers, name='Liste_des_utilisateurs'),
@@ -27,12 +26,10 @@ urlpatterns = [
     path('Liste_des_compétences/', views.ListCompetence, name='Liste_des_compétences'),
     path('Liste_des_certifications/', views.ListOfCertification, name='Liste_des_certifications'),
     path('Liste_des_sociétés/', views.ListSociety, name='Liste_des_sociétés'),
-
     path('Ajouter_Domaines_Compétences/', views.AddFieldCompDegreeSociety, name='Ajouter_Domaines_Compétences'),
     re_path(r'^(?P<collaborater_id>[0-9]+)/$', views.Profils, name='Profils'),
     re_path(r'^DeleteCollab/(?P<collaborater_id>[0-9]+)/$', views.DeleteCollab, name='DeleteCollab'),
     re_path(r'^DeleteUser/(?P<user_id>[0-9]+)/$', views.DeleteUser, name='DeleteUser'),
-
-    # path('Fieldlist/', views.Fieldlist, name='Fieldlist'),
-
+    re_path(r'^Mon_profil/(?P<user_id>[0-9]+)/$', views.CollaboraterProfil, name='Mon_profil'),
+    re_path(r'^Ajouter_des_compétences/(?P<user_id>[0-9]+)/$', views.AddCompetenceCollab, name='Ajouter_des_compétences'),
 ]

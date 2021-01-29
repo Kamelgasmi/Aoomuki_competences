@@ -7,8 +7,6 @@
         <div class="title_left">
           <h3>Ajout de compétences</h3>
         </div>
-
-        
       </div>
       <div class="clearfix"></div>
           <div class="row">
@@ -43,31 +41,39 @@
                           <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12 text-warning" for="first-name">Collaborateur <span class="required">*</span></label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <select name="Utilisateurs" class="form-control">
+                              {% if user.is_authenticated%}
+                                  {% for results in showCollab %}
+                                      {% if results.user_id == user.id%}
+                              <p>{{results.Lastname}} {{results.Firstname}}</p>
+                                  {% comment %} <select name="Utilisateurs" class="form-control">
                                   {% for results in showCollab %}
                                       <option value="{{ results.id}}">{{ results.Lastname | upper}} {{ results.Firstname}}</option>
                                   {% endfor %}
-                                  </select>
+                                  </select> {% endcomment %}
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12 text-warning" for="society">Société <span class="required">*</span></label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <select name="Société" class="form-control">
+                                <p>{{results.society}} </p>
+
+                                  {% comment %} <select name="Société" class="form-control">
                                   {% for results in showSociety %}
                                   <option value="{{ results.id}}">{{ results.name}}</option>
                                   {% endfor %}
-                                  </select>
+                                  </select> {% endcomment %}
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12 text-warning" for="workStation">Poste <span class="required">*</span></label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <select name="Poste" class="form-control">
+                                  <p>{{results.workstation}} </p>
+
+                                  {% comment %} <select name="Poste" class="form-control">
                                   {% for results in showWorkStation %}
                                   <option value="{{ results.id}}">{{ results.name}}</option>
                                   {% endfor %}
-                                  </select>
+                                  </select> {% endcomment %}
                               </div>
                           </div>
                           
@@ -109,7 +115,7 @@
                                           {% if field.id == results.field_id %}
                                               <tr height="50">
                                                   <td width="200" scope="row">
-                                                      <input value="{{ field.id }}" type="checkbox" name="check">{{ results.name}}
+                                                      <p>{{ results.name}}</p>
                                                   </td>
                                                   <td width="100">
                                                       <select class="form-control form-control-sm justify-content-center">
@@ -181,6 +187,14 @@
           </div>
         </div>
       </div>
+                                                {% else %}
+                                          {% comment %} <p>Pour ajouter vos compétences, vous devez avoir un compte collaborateur.</p> {% endcomment %}
+
+      {% endif %}
+      {% endfor %}
+
+            {% endif %}
+
     </div>
   </div>
 {% endblock content %}
