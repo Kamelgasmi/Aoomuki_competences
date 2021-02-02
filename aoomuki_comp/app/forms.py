@@ -1,9 +1,10 @@
-from django.forms import ModelForm, TextInput, EmailInput, FileInput, PasswordInput, Select, CheckboxInput
+from django.forms import ModelForm, TextInput, EmailInput, FileInput, PasswordInput, Select, CheckboxInput,RadioSelect
 from django.forms.utils import ErrorList
 from django import forms
 from .models import Field, Competence, ListCertification, Society, Collaborater, ListofCompetence
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import formset_factory
 
 # class ParagraphErrorList(ErrorList):
 #     def __str__(self):
@@ -42,12 +43,25 @@ class AddCollaboraterForm(ModelForm):
 class AddCompCollabForm(ModelForm):
     class Meta:
         model = ListofCompetence
-        fields = ["Competence", "ListInterest", "ListLevel"]
+        fields = [ "ListInterest", "ListLevel" ]
         widgets = {
-            'Competence': TextInput(attrs={'class': 'form-control'}),
-            'ListInterest': Select(attrs={'class': 'form-control'}),
-            'ListLevel':Select(attrs={'class': 'form-control'}),
+            # 'Collaborater': Select(attrs={'class': 'select','style':'width: 150px'}),
+            # 'Competence': Select(attrs={'class': 'select','style':'width: 150px'}),
+            'ListInterest': RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
+            'ListLevel':RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
         }
+        
+# AddCompCollabFormSet = formset_factory(AddCompCollabForm)
+
+    # def __init__(self, *args, **kwargs):
+    #     super(AddCompCollabForm, self).__init__(*args, **kwargs)
+    #     if user.is_authenticated :
+    #         self.fields['Collaborater'].disabled = True # still displays the field in the template
+    #         self.fields['Collaborater'].value = {{ Collaborater.Lasname}} # still displays the field in the template
+
+    #         # del self.fields['job'] # removes field from form and template
+        
+
 
 class AddFieldForm(ModelForm):
     class Meta:

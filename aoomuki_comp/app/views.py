@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.forms import modelformset_factory
 
 @login_required
 def index(request):
@@ -85,48 +86,91 @@ def AllFormlist(request):
     resultsStatut=Statut.objects.all()
     return render(request, "app/form.html",{"showStatut":resultsStatut, "showSociety":resultsSociety, "showComp":resultsComp, "showCertification":resultsCertification, "showCollab":resultsCollaborater, "showWorkStation":resultsWorkStation, "showField":resultsField, "showLevel":resultsLevel, "showInterest":resultsInterest, "showUser":resultsUser, "fields":field, "showLevel":level, "showInterest":interest})
 
+# def AddCompetenceCollab(request, user_id):
+#     field = Field.objects.all()
+#     user = get_object_or_404(User,pk=user_id)
+#     collaborater = Collaborater.objects.all()
+#     competence = Competence.objects.all()
+#     form1 = modelformset_factory(ListofCompetence, fields=("ListInterest", "ListLevel", "Collaborater"))
+#     context = {
+#         'field': field,
+#         'user': user,
+#         'collaborater': collaborater,
+#         'competence': competence,
+#         'form1': form1
+#     }
+#     if request.method == 'POST' and 'btnform1' in request.POST:
+#         form1 = modelformset_factory(AddCompCollabForm)
+#         if form1.is_valid():
+#             interest = form1.cleaned_data['ListInterest']
+#             level = form1.cleaned_data['ListLevel']
+#             # competence = form1.cleaned_data['Competence']
+#             collaborater = form1.cleaned_data['Collaborater']
+#             form = form1.save(commit = False)
+#             form.user = request.user
+#             form.save()
+#             messages.success(request, "Les compétences ont été ajoutées")
+#             form1 = formset_factory( AddCompCollabForm)
+#             # form2 = AddCompetenceForm()
+#         return render(request, 'app/formAddCompetenceCollab.html', context)
+
+#     # elif request.method == 'POST' and 'btnform2' in request.POST:
+#     #     form2 = AddCompetenceForm(request.POST)
+#     #     if form2.is_valid():
+#     #         name = form2.cleaned_data['name']
+#     #         competence = Competence.objects.filter(name=name)
+#     #         if not competence.exists():
+#     #             form2.save()
+#     #             messages.success(request, "La compétence a été ajoutée")
+#     #             form1 = AddFieldForm()
+#     #             form2 = AddCompetenceForm()
+#     #             form3 = AddCertificationForm()
+#     #             form4 = AddSocietyForm()
+#     #         return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+
+#     else:
+#         form1 = formset_factory( AddCompCollabForm)
+#         context = {
+#         'field': field,
+#         'user': user,
+#         'collaborater': collaborater,
+#         'competence': competence,
+#         'form1': form1
+
+#     }
+#     return render(request, 'app/formAddCompetenceCollab.html', context)
+
+
+
 def AddCompetenceCollab(request, user_id):
-    field=Field.objects.all()
-    user=get_object_or_404(User,pk=user_id)
-    collaborater =Collaborater.objects.all()
+    field = Field.objects.all()
+    user = get_object_or_404(User,pk=user_id)
+    collaborater = Collaborater.objects.all()
+    competence = Competence.objects.all()
+    form1 = AddCompCollabForm()
     context = {
         'field': field,
         'user': user,
         'collaborater': collaborater,
+        'competence': competence,
+        'form1': form1
     }
     if request.method == 'POST' and 'btnform1' in request.POST:
         form1 = AddCompCollabForm(request.POST)
         if form1.is_valid():
-            # competence = form1.cleaned_data['Competence']
-            # interest = form1.cleaned_data['ListInterest']
-            # level = form1.cleaned_data['ListLevel']
+            interest = form1.cleaned_data['ListInterest']
+            level = form1.cleaned_data['ListLevel']
+            # # competence = form1.cleaned_data['Competence']
+            # collaborater = form1.cleaned_data['Collaborater']
             form1.save()
             messages.success(request, "Les compétences ont été ajoutées")
             form1 = AddCompCollabForm()
             # form2 = AddCompetenceForm()
-        return render(request, 'app/formAddCompetenceCollab.html', {'form1': form1}, context)
-
-    # elif request.method == 'POST' and 'btnform2' in request.POST:
-    #     form2 = AddCompetenceForm(request.POST)
-    #     if form2.is_valid():
-    #         name = form2.cleaned_data['name']
-    #         competence = Competence.objects.filter(name=name)
-    #         if not competence.exists():
-    #             form2.save()
-    #             messages.success(request, "La compétence a été ajoutée")
-    #             form1 = AddFieldForm()
-    #             form2 = AddCompetenceForm()
-    #             form3 = AddCertificationForm()
-    #             form4 = AddSocietyForm()
-    #         return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+        return render(request, 'app/formAddCompetenceCollab.html', context)
 
     else:
-        form1 = AddFieldForm()
-    return render(request, 'app/formAddCompetenceCollab.html', {'form1': form1}, context)
-
-
-
-
+        form1 = AddCompCollabForm()
+    return render(request, 'app/formAddCompetenceCollab.html', context)
 
 
 
@@ -314,7 +358,7 @@ def AddFieldCompDegreeSociety(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+            return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
 
     elif request.method == 'POST' and 'btnform2' in request.POST:
         form2 = AddCompetenceForm(request.POST)
@@ -328,7 +372,7 @@ def AddFieldCompDegreeSociety(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
 
     elif request.method == 'POST' and 'btnform3' in request.POST:
         form3 = AddCertificationForm(request.POST)
@@ -342,7 +386,7 @@ def AddFieldCompDegreeSociety(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
 
     elif request.method == 'POST' and 'btnform4' in request.POST:
         form4 = AddSocietyForm(request.POST)
@@ -356,14 +400,14 @@ def AddFieldCompDegreeSociety(request):
                 form2 = AddCompetenceForm()
                 form3 = AddCertificationForm()
                 form4 = AddSocietyForm()
-            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+            return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
 
     else:
         form1 = AddFieldForm()
         form2 = AddCompetenceForm()
         form3 = AddCertificationForm()
         form4 = AddSocietyForm()
-    return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
+    return render(request, 'app/ListAddFieldCompetence.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
 
 @login_required
 def search(request):

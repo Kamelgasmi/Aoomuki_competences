@@ -4,14 +4,62 @@
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
-            <div class="">
-                <div class="x_content"> 
-                    <form method="POST" class="post-form" >{% csrf_token %}
-                        {{ form1.as_ul }}
-                        <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
-                    </form>
+            {% if user.is_authenticated%}
+            {% for collaborater in collaborater %}
+            {% if collaborater.user_id == user.id%}
+                <div class="col-12 text-center">
+                    <h1>{{ collaborater.Lastname }} {{ collaborater.Firstname }} ({{ collaborater.statut.name }})</h1>
+                    <h2>{{ collaborater.society.name }}</h2>
+                    <h2>{{ collaborater.workstation.name }}</h2>
                 </div>
-            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+                <div class="">
+                <div class="text-center text-success " >
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h3>{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                </div> 
+
+                    {% comment %} {% if user.is_authenticated%}
+                    {% for collaborater in collaborater %}
+                    {% if collaborater.user_id == user.id%}  {% endcomment %}
+                    <div class="col-md-12"> 
+                        <div>
+                        {% comment %} <form method="post" action="">
+                        {{ formset.management_form }}
+                            <table>
+                            {% for form in formset %}
+                            {{ form.as_p }}
+                            {% endfor %}
+                            <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+
+                            </table>
+                        </form> {% endcomment %}
+                        <form method="POST" class="post-form" >{% csrf_token %}
+                                {% for field in field %}    
+                                <h4 class="text-danger">{{ field.name}}</h4>
+                                    {% for competence in competence %}
+                                    {% if competence.field_id == field.id %}
+                                        <p>{{ competence.name | upper}}</p>
+                                        {{ form1.as_p}}
+                                                                        <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </form> 
+                        </div>
+                    </div>
+                    {% comment %} {% endif %}
+                    {% endfor %}
+                    {% endif %} {% endcomment %}
+
+                </div>
+
         </div>
     </div>
 </div>

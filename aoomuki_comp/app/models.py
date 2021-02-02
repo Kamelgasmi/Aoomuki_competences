@@ -98,10 +98,10 @@ class Collaborater(models.Model):
 
 
 class ListofCompetence(models.Model):
-    Collaborater = models.ForeignKey(Collaborater,on_delete=models.CASCADE, null=True, default=1)
-    Competence = models.ForeignKey(Competence,on_delete=models.CASCADE, null=True, default=1)
-    ListInterest = models.ForeignKey(ListInterest, on_delete=models.CASCADE, null=True, default=1)
-    ListLevel = models.ForeignKey(ListLevel,on_delete=models.CASCADE, null=True, default=1)
+    Collaborater = models.ForeignKey(Collaborater, verbose_name="Collaborateur", on_delete=models.CASCADE, null=True)
+    Competence = models.ForeignKey(Competence,verbose_name="Compétence", on_delete=models.CASCADE, null=True)
+    ListInterest = models.ForeignKey(ListInterest, verbose_name="Intérêt", on_delete=models.CASCADE, null=True, default=0)
+    ListLevel = models.ForeignKey(ListLevel, verbose_name="Niveau", on_delete=models.CASCADE, null=True, default=0)
 
     def __str__(self):
         return str(self.Collaborater)
