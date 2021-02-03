@@ -65,5 +65,5 @@ class SocietyAdmin(admin.ModelAdmin):
 
 @admin.register(ListofCompetence)
 class ListofCompetenceAdmin(admin.ModelAdmin):
-    list_display = ('Collaborater', 'Competence', 'ListLevel', 'ListInterest')
+    list_display = ('User', 'Competence', 'ListLevel', 'ListInterest')
     pass
