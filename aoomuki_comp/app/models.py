@@ -98,7 +98,7 @@ class Collaborater(models.Model):
 
 
 class ListofCompetence(models.Model):
-    Collaborater = models.ForeignKey(Collaborater, verbose_name="Collaborateur", on_delete=models.CASCADE, null=True)
+    User = models.ForeignKey(User, verbose_name="Utilisateur", on_delete=models.CASCADE, null=True)
     Competence = models.ForeignKey(Competence,verbose_name="Compétence", on_delete=models.CASCADE, null=True)
     ListInterest = models.ForeignKey(ListInterest, verbose_name="Intérêt", on_delete=models.CASCADE, null=True, default=0)
     ListLevel = models.ForeignKey(ListLevel, verbose_name="Niveau", on_delete=models.CASCADE, null=True, default=0)

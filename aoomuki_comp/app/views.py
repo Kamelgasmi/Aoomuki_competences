@@ -160,8 +160,8 @@ def AddCompetenceCollab(request, user_id):
         if form1.is_valid():
             interest = form1.cleaned_data['ListInterest']
             level = form1.cleaned_data['ListLevel']
-            # # competence = form1.cleaned_data['Competence']
-            # collaborater = form1.cleaned_data['Collaborater']
+            competence = form1.cleaned_data['Competence']
+            # user = form1.cleaned_data['User']
             form1.save()
             messages.success(request, "Les compétences ont été ajoutées")
             form1 = AddCompCollabForm()
@@ -171,6 +171,13 @@ def AddCompetenceCollab(request, user_id):
     else:
         form1 = AddCompCollabForm()
     return render(request, 'app/formAddCompetenceCollab.html', context)
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 1e58397e39872f95c4a93d2cb358b804220699eb
 
 
 

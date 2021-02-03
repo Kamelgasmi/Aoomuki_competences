@@ -24,11 +24,12 @@
                     {% endif %}
                 </div> 
 
-                    {% comment %} {% if user.is_authenticated%}
+                    {% if user.is_authenticated%}
                     {% for collaborater in collaborater %}
-                    {% if collaborater.user_id == user.id%}  {% endcomment %}
+                    {% if collaborater.user_id == user.id%} 
                     <div class="col-md-12"> 
                         <div>
+<<<<<<< HEAD
                         {% comment %} <form method="post" action="">
                         {{ formset.management_form }}
                             <table>
@@ -54,11 +55,30 @@
                                     <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
 
                             </form> 
+=======
+                        {% comment %} {% for competence in competence %}
+                        <p>{{ competence.name | upper}}</p>
+                        <p>{{ competence.id | upper}}</p>
+                        {% endfor %} {% endcomment %}
+                        <form method="POST" class="post-form" action="{% url 'app:Ajouter_des_compétences'  user_id=user.id %}">
+                                {% csrf_token %}
+                                {% comment %} {% for field in field %}    
+                                <h4 class="text-danger">{{ field.name}}</h4>
+                                {% for competence in competence %}
+                                {% if competence.field_id == field.id %}  {% endcomment %}
+                                {% comment %} <p>{{ user.id | upper}}</p> {% endcomment %}
+                                {{ form1.as_p}}
+                                <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+                                {% comment %} {% endif %}
+                                {% endfor %}
+                                {% endfor %}  {% endcomment %}
+                        </form> 
+>>>>>>> 1e58397e39872f95c4a93d2cb358b804220699eb
                         </div>
                     </div>
-                    {% comment %} {% endif %}
+                    {% endif %}
                     {% endfor %}
-                    {% endif %} {% endcomment %}
+                    {% endif %}
 
                 </div>
 
