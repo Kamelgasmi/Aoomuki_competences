@@ -94,7 +94,7 @@ def AddCompetenceCollab(request, user_id):
     user = get_object_or_404(User,pk=user_id)
     collaborater = Collaborater.objects.all()
     competence = Competence.objects.all()
-    form1 = AddCompCollabForm(initial={'User': request.user.last_name})
+    form1 = AddCompCollabForm(initial={'User': request.user.id})
     context = {
         'field': field,
         'user': user,
@@ -111,7 +111,7 @@ def AddCompetenceCollab(request, user_id):
             user = form1.cleaned_data['User']
             form1.save()
             messages.success(request, "Les compétences ont été ajoutées")
-            form1 = AddCompCollabForm(initial={'User': request.user.last_name})
+            form1 = AddCompCollabForm(initial={'User': request.user.id})
             # form2 = AddCompetenceForm()
         return render(request, 'app/formAddCompetenceCollab.html', context)
 
