@@ -170,15 +170,7 @@ def AddCompetenceCollab(request, user_id):
 
     else:
         form1 = AddCompCollabForm()
-<<<<<<< HEAD
     return render(request, 'app/formAddCompetenceCollab.html', context)
-=======
-    return render(request, 'app/formAddCompetenceCollab.html', {'form1': form1}, context)
-
-
-
-
->>>>>>> 3405685fb5369fd02bfd243c153994154542df24
 
 
 

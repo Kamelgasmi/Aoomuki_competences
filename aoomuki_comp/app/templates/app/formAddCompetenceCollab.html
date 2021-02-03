@@ -39,18 +39,20 @@
 
                             </table>
                         </form> {% endcomment %}
-                        <form method="POST" class="post-form" >{% csrf_token %}
+                        <form  method="POST" class="post-form" >{% csrf_token %}
                                 {% for field in field %}    
                                 <h4 class="text-danger">{{ field.name}}</h4>
                                     {% for competence in competence %}
                                     {% if competence.field_id == field.id %}
                                         <p>{{ competence.name | upper}}</p>
+                                         <p>{{ competence.id | upper}}</p>
+                                         <p>{{ user.id | upper}}</p>
                                         {{ form1.as_p}}
-                                                                        <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
-
                                     {% endif %}
                                     {% endfor %}
                                 {% endfor %}
+                                    <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+
                             </form> 
                         </div>
                     </div>
