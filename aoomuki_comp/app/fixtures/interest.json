@@ -1,23 +1,31 @@
 [
-    {
-        "model": "app.ListInterest",
-        "pk": 1,
-        "fields": {
-          "value": "1",
-          "commentary": "un"
-      }
-    },
+  {
+    "model": "app.ListInterest",
+    "pk": 1,
+    "fields": {
+      "value": "0",
+      "commentary": "zéro"
+  }
+},
     {
       "model": "app.ListInterest",
       "pk": 2,
       "fields": {
-        "value": "2",
-        "commentary": "deux"
+        "value": "1",
+        "commentary": "un"
       }
     },
     {
         "model": "app.ListInterest",
         "pk": 3,
+        "fields": {
+          "value": "2",
+          "commentary": "deux"
+        }
+      },
+      {
+        "model": "app.ListInterest",
+        "pk": 4,
         "fields": {
           "value": "3",
           "commentary": "trois"
@@ -25,7 +33,7 @@
       },
       {
         "model": "app.ListInterest",
-        "pk": 4,
+        "pk": 5,
         "fields": {
           "value": "4",
           "commentary": "quatre"
