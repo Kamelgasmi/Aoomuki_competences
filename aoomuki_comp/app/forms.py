@@ -43,12 +43,24 @@ class AddCollaboraterForm(ModelForm):
 class AddCompCollabForm(forms.ModelForm):
     class Meta:
         model = ListofCompetence
+<<<<<<< HEAD
         fields = [ "User","Competence", "ListInterest", "ListLevel" ]
+=======
+<<<<<<< HEAD
+        fields = [ "ListInterest", "ListLevel"]
+        widgets = {
+            # 'Collaborater': Select(attrs={'class': 'select','style':'width: 150px'}),
+            'ListInterest': RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
+            'ListLevel':RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
+=======
+        fields = [ "Competence", "ListInterest", "ListLevel" ]
+>>>>>>> 79ddd00346bc74cf41ae1b28cfd8a449d0ec95cb
         widgets = {
             'User': Select(attrs={'class': 'select','style':'width: 150px'}),
             'Competence': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListInterest': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListLevel':Select(attrs={'class': 'select','style':'width: 150px'}),
+>>>>>>> 1e58397e39872f95c4a93d2cb358b804220699eb
         }
         # form.fields['user'].initial = 'Romuald'
         # def __init__(self, *args, **kwargs):

@@ -30,6 +30,33 @@
                     {% if collaborater.user_id == user.id%}  {% endcomment %}
                     <div class="col-md-12"> 
                         <div>
+<<<<<<< HEAD
+                        {% comment %} <form method="post" action="">
+                        {{ formset.management_form }}
+                            <table>
+                            {% for form in formset %}
+                            {{ form.as_p }}
+                            {% endfor %}
+                            <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+
+                            </table>
+                        </form> {% endcomment %}
+                        <form  method="POST" class="post-form" >{% csrf_token %}
+                                {% for field in field %}    
+                                <h4 class="text-danger">{{ field.name}}</h4>
+                                    {% for competence in competence %}
+                                    {% if competence.field_id == field.id %}
+                                        <p>{{ competence.name | upper}}</p>
+                                         <p>{{ competence.id | upper}}</p>
+                                         <p>{{ user.id | upper}}</p>
+                                        {{ form1.as_p}}
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                    <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+
+                            </form> 
+=======
                         {% comment %} {% for competence in competence %}
                         <p>{{ competence.name | upper}}</p>
                         <p>{{ competence.id | upper}}</p>
@@ -47,6 +74,7 @@
                                 {% endfor %}
                                 {% endfor %}  {% endcomment %}
                         </form> 
+>>>>>>> 1e58397e39872f95c4a93d2cb358b804220699eb
                         </div>
                     </div>
                     {% comment %} {% endif %}
