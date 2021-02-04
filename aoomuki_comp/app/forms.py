@@ -41,22 +41,15 @@ class AddCollaboraterForm(ModelForm):
         }
 
 class AddCompCollabForm(ModelForm):
+    
     class Meta:
         model = ListofCompetence
-<<<<<<< HEAD
-        fields = [ "ListInterest", "ListLevel"]
+        fields = [ "ListInterest", "ListLevel", "User"]
         widgets = {
+            'User': forms.HiddenInput(),
             # 'Collaborater': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListInterest': RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
             'ListLevel':RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
-=======
-        fields = [ "Competence", "ListInterest", "ListLevel" ]
-        widgets = {
-            # 'User': Select(attrs={'class': 'select','style':'width: 150px'}),
-            'Competence': Select(attrs={'class': 'select','style':'width: 150px'}),
-            'ListInterest': Select(attrs={'class': 'select','style':'width: 150px'}),
-            'ListLevel':Select(attrs={'class': 'select','style':'width: 150px'}),
->>>>>>> 1e58397e39872f95c4a93d2cb358b804220699eb
         }
         
 # AddCompCollabFormSet = formset_factory(AddCompCollabForm)
