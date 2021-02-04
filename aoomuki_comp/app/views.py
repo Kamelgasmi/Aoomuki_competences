@@ -86,68 +86,15 @@ def AllFormlist(request):
     resultsStatut=Statut.objects.all()
     return render(request, "app/form.html",{"showStatut":resultsStatut, "showSociety":resultsSociety, "showComp":resultsComp, "showCertification":resultsCertification, "showCollab":resultsCollaborater, "showWorkStation":resultsWorkStation, "showField":resultsField, "showLevel":resultsLevel, "showInterest":resultsInterest, "showUser":resultsUser, "fields":field, "showLevel":level, "showInterest":interest})
 
-# def AddCompetenceCollab(request, user_id):
-#     field = Field.objects.all()
-#     user = get_object_or_404(User,pk=user_id)
-#     collaborater = Collaborater.objects.all()
-#     competence = Competence.objects.all()
-#     form1 = modelformset_factory(ListofCompetence, fields=("ListInterest", "ListLevel", "Collaborater"))
-#     context = {
-#         'field': field,
-#         'user': user,
-#         'collaborater': collaborater,
-#         'competence': competence,
-#         'form1': form1
-#     }
-#     if request.method == 'POST' and 'btnform1' in request.POST:
-#         form1 = modelformset_factory(AddCompCollabForm)
-#         if form1.is_valid():
-#             interest = form1.cleaned_data['ListInterest']
-#             level = form1.cleaned_data['ListLevel']
-#             # competence = form1.cleaned_data['Competence']
-#             collaborater = form1.cleaned_data['Collaborater']
-#             form = form1.save(commit = False)
-#             form.user = request.user
-#             form.save()
-#             messages.success(request, "Les compétences ont été ajoutées")
-#             form1 = formset_factory( AddCompCollabForm)
-#             # form2 = AddCompetenceForm()
-#         return render(request, 'app/formAddCompetenceCollab.html', context)
-
-#     # elif request.method == 'POST' and 'btnform2' in request.POST:
-#     #     form2 = AddCompetenceForm(request.POST)
-#     #     if form2.is_valid():
-#     #         name = form2.cleaned_data['name']
-#     #         competence = Competence.objects.filter(name=name)
-#     #         if not competence.exists():
-#     #             form2.save()
-#     #             messages.success(request, "La compétence a été ajoutée")
-#     #             form1 = AddFieldForm()
-#     #             form2 = AddCompetenceForm()
-#     #             form3 = AddCertificationForm()
-#     #             form4 = AddSocietyForm()
-#     #         return render(request, 'app/ListAddFieldCompetence.html',{'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4}, context)
-
-#     else:
-#         form1 = formset_factory( AddCompCollabForm)
-#         context = {
-#         'field': field,
-#         'user': user,
-#         'collaborater': collaborater,
-#         'competence': competence,
-#         'form1': form1
-
-#     }
-#     return render(request, 'app/formAddCompetenceCollab.html', context)
-
 
 
 def AddCompetenceCollab(request, user_id):
+    
     field = Field.objects.all()
     user = get_object_or_404(User,pk=user_id)
     collaborater = Collaborater.objects.all()
     competence = Competence.objects.all()
-    form1 = AddCompCollabForm()
+    form1 = AddCompCollabForm(initial={'User': request.user.id})
     context = {
         'field': field,
         'user': user,
@@ -156,15 +103,21 @@ def AddCompetenceCollab(request, user_id):
         'form1': form1
     }
     if request.method == 'POST' and 'btnform1' in request.POST:
-        form1 = AddCompCollabForm(request.POST)
+        form1 = AddCompCollabForm(request.POST,initial={'User': request.user.id})
         if form1.is_valid():
             interest = form1.cleaned_data['ListInterest']
             level = form1.cleaned_data['ListLevel']
+<<<<<<< HEAD
             # user = form1.cleaned_data['User']
             form1.save(User.id)
             print(request.POST)
+=======
+            competence = form1.cleaned_data['Competence']
+            user = form1.cleaned_data['User']
+            form1.save()
+>>>>>>> aa29f99d0ccf6266448d962349975b6083f5cf71
             messages.success(request, "Les compétences ont été ajoutées")
-            form1 = AddCompCollabForm()
+            form1 = AddCompCollabForm(initial={'User': request.user.id})
             # form2 = AddCompetenceForm()
         return render(request, 'app/formAddCompetenceCollab.html', context)
 
@@ -425,72 +378,4 @@ def search(request):
     }
     return render(request, 'app/search.html', context)
 
-# def logout_request(request):
-#     logout(request)
-#     messages.info(request, "Logged out successfully!")
-#     return redirect("index")
-
-# def login_request(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request=request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 messages.info(request, f"You are now logged in as {username}")
-#                 return redirect('/')
-#             else:
-#                 messages.error(request, "Invalid username or password.")
-#         else:
-#             messages.error(request, "Invalid username or password.")
-#     form = AuthenticationForm()
-#     return render(request = request,
-#                     template_name = "app/login.html",
-#                     context={"form":form})
-
-# def loginPage(request):
-# 	if request.user.is_authenticated:
-# 		return redirect('index')
-# 	else:
-# 		if request.method == 'POST':
-# 			login = request.POST.get('login')
-# 			password =request.POST.get('password')
-
-# 			user = authenticate(request, login=login, password=password)
-
-# 			if user is not None:
-# 				login(request, user)
-# 				return redirect('index')
-# 			else:
-# 				messages.info(request, 'Login OR password is incorrect')
-
-# 		context = {}
-# 		return render(request, 'app/login.html', context)
-
-# def logoutUser(request):
-# 	logout(request)
-# 	return redirect('login')
-
-
-# def user_login(request):
-#     """Authenticate a user."""
-#     # Etape 1 :
-#     login = request.POST["login"]
-#     password = request.POST["password"]
-
-#     # Etape 2 :
-#     user = authenticate(request, login=login, password=password)
-
-#     # Etape 3 :
-#     if user is not None:
-#         login(request, user)
-#         messages.add_message(request, messages.SUCCESS, "Vous êtes connecté !")
-#     else:
-#         messages.add_message(
-#             request, messages.ERROR, "Les champs renseignés sont invalides."
-#         )
-
-#     return redirect("index.html")
 

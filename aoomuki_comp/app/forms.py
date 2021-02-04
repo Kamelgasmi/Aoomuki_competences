@@ -40,6 +40,7 @@ class AddCollaboraterForm(ModelForm):
 
         }
 
+<<<<<<< HEAD
 class AddCompCollabForm(ModelForm):
     
     class Meta:
@@ -50,18 +51,23 @@ class AddCompCollabForm(ModelForm):
             # 'Collaborater': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListInterest': RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
             'ListLevel':RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
+=======
+class AddCompCollabForm(forms.ModelForm):
+    class Meta:
+        model = ListofCompetence
+        fields = [ "User","Competence", "ListInterest", "ListLevel" ]
+        widgets = {
+            'User': Select(attrs={'class': 'select','style':'width: 150px'}),
+            'Competence': Select(attrs={'class': 'select','style':'width: 150px'}),
+            'ListInterest': Select(attrs={'class': 'select','style':'width: 150px'}),
+            'ListLevel':Select(attrs={'class': 'select','style':'width: 150px'}),
+>>>>>>> aa29f99d0ccf6266448d962349975b6083f5cf71
         }
-        
-# AddCompCollabFormSet = formset_factory(AddCompCollabForm)
-
-    # def __init__(self, *args, **kwargs):
-    #     super(AddCompCollabForm, self).__init__(*args, **kwargs)
-    #     if user.is_authenticated :
-    #         self.fields['Collaborater'].disabled = True # still displays the field in the template
-    #         self.fields['Collaborater'].value = {{ Collaborater.Lasname}} # still displays the field in the template
-
-    #         # del self.fields['job'] # removes field from form and template
-        
+        # form.fields['user'].initial = 'Romuald'
+        # def __init__(self, *args, **kwargs):
+        # user = kwargs.pop('user','')
+        # super(AddCompCollabForm, self).__init__(*args, **kwargs)
+        # self.fields['user_defined_code']=forms.ModelChoiceField(queryset=UserDefinedCode.objects.filter(owner=user))
 
 
 class AddFieldForm(ModelForm):

@@ -10,7 +10,8 @@
                 <div class="col-12 text-center">
                     <h1>{{ collaborater.Lastname }} {{ collaborater.Firstname }} ({{ collaborater.statut.name }})</h1>
                     <h2>{{ collaborater.society.name }}</h2>
-                    <h2>{{ collaborater.workstation.name }}</h2>
+                    <h2>{{ collaborater.workstation.name }} {{ user.last_name }}</h2>
+
                 </div>
             {% endif %}
             {% endfor %}
@@ -24,9 +25,9 @@
                     {% endif %}
                 </div> 
 
-                    {% if user.is_authenticated%}
+                    {% comment %} {% if user.is_authenticated%}
                     {% for collaborater in collaborater %}
-                    {% if collaborater.user_id == user.id%} 
+                    {% if collaborater.user_id == user.id%}  {% endcomment %}
                     <div class="col-md-12"> 
                         <div>
                         {% comment %} <form method="post" action="">
@@ -57,9 +58,9 @@
                             </form> 
                         </div>
                     </div>
-                    {% endif %}
+                    {% comment %} {% endif %}
                     {% endfor %}
-                    {% endif %}
+                    {% endif %} {% endcomment %}
 
                 </div>
 

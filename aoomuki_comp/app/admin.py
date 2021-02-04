@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Collaborater, Field, Competence, ListLevel, ListInterest, ListWorkStation, ListCertification, Statut, Society, ListofCompetence
+from .models import Collaborater, Field, Competence, ListWorkStation, ListCertification, Statut, Society, ListofCompetence
 
 
 
@@ -39,13 +39,13 @@ class ListofCompetenceInline(admin.TabularInline):
         (None, {'fields': ['Competence', 'ListLevel', 'ListInterest']})
         ] # list columns
 
-@admin.register(ListLevel)
-class ListLevelAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(ListLevel)
+# class ListLevelAdmin(admin.ModelAdmin):
+#     pass
 
-@admin.register(ListInterest)
-class ListInterestAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(ListInterest)
+# class ListInterestAdmin(admin.ModelAdmin):
+#     pass
 
 @admin.register(ListWorkStation)
 class ListWorkStationAdmin(admin.ModelAdmin):
