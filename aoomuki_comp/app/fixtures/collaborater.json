@@ -22,7 +22,7 @@
           "workstation_id": "4",  
           "society_id": "1",
           "statut_id": "1",
-          "user_id": "3"
+          "user_id": "6"
       }
     },
     {
@@ -35,7 +35,7 @@
           "workstation_id": "1",
           "society_id": "1",
           "statut_id": "2",
-          "user_id": "5"
+          "user_id": "4"
       }
     },
     {
@@ -48,7 +48,7 @@
           "workstation_id": "1",
           "society_id": "1",
           "statut_id": "2",
-          "user_id": "4"
+          "user_id": "5"
       }
     },
     {
@@ -61,7 +61,7 @@
           "workstation_id": "1",
           "society_id": "1",
           "statut_id": "2",
-          "user_id": null
+          "user_id": "3"
       }
     }
 ]

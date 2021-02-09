@@ -87,14 +87,13 @@ def AllFormlist(request):
     return render(request, "app/form.html",{"showStatut":resultsStatut, "showSociety":resultsSociety, "showComp":resultsComp, "showCertification":resultsCertification, "showCollab":resultsCollaborater, "showWorkStation":resultsWorkStation, "showField":resultsField, "showLevel":resultsLevel, "showInterest":resultsInterest, "showUser":resultsUser, "fields":field, "showLevel":level, "showInterest":interest})
 
 
-
+@login_required
 def AddCompetenceCollab(request, user_id):
-    
     field = Field.objects.all()
     user = get_object_or_404(User,pk=user_id)
     collaborater = Collaborater.objects.all()
     competence = Competence.objects.all()
-    form1 = AddCompCollabForm(initial={'User': request.user.id})
+    form1 = AddCompCollabForm()
     context = {
         'field': field,
         'user': user,
@@ -103,32 +102,59 @@ def AddCompetenceCollab(request, user_id):
         'form1': form1
     }
     if request.method == 'POST' and 'btnform1' in request.POST:
-        form1 = AddCompCollabForm(request.POST,initial={'User': request.user.id})
-        if form1.is_valid():
-            interest = form1.cleaned_data['ListInterest']
-            level = form1.cleaned_data['ListLevel']
-            competence = form1.cleaned_data['Competence']
-            user = form1.cleaned_data['User']
-            form1.save()
-            messages.success(request, "Les compétences ont été ajoutées")
-            form1 = AddCompCollabForm(initial={'User': request.user.id})
-            # form2 = AddCompetenceForm()
-        return render(request, 'app/formAddCompetenceCollab.html', context)
+        if request.user.is_authenticated:
+            form1 = AddCompCollabForm(request.POST)
+            if form1.is_valid():
+                interest = form1.cleaned_data['ListInterest']
+                level = form1.cleaned_data['ListLevel']
+                competence = form1.cleaned_data['Competence']
+                # user = form1.cleaned_data['User']
+                formComp = form1.save(commit=False) # Renvoyer un objet sans enregistrer dans la base de données
+                formComp.User = User.objects.get(pk=request.user.id) # selectionne l'identifiant de l'utilisateur actuel
+                # formComp.Competence = Competence.objects.get(id) # selectionne l'identifiant de l'utilisateur actuel
+                formComp.save() # sauvergarde tout cette fois ci
+                messages.success(request, "Les compétences ont été ajoutées")
+                form1 = AddCompCollabForm()
+                # form2 = AddCompetenceForm()
+            return render(request, 'app/formAddCompetenceCollab.html', context)
 
     else:
         form1 = AddCompCollabForm()
     return render(request, 'app/formAddCompetenceCollab.html', context)
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> 1e58397e39872f95c4a93d2cb358b804220699eb
+# def AddCompetenceCollab(request, user_id):
+#     field = Field.objects.all()
+#     user = get_object_or_404(User,pk=user_id)
+#     collaborater = Collaborater.objects.all()
+#     competence = Competence.objects.all()
+#     form1 = AddCompCollabForm(initial={'Competence':  1 })
+#     context = {
+#         'field': field,
+#         'user': user,
+#         'collaborater': collaborater,
+#         'competence': competence,
+#         'user_id': user.id,
+#         'form1': form1
+#     }
+#     if request.method == 'POST' and 'btnform1' in request.POST:
+#         form1 = AddCompCollabForm(request.POST,instance= user,initial={'Competence': 1})
+#         if form1.is_valid():
+#             interest = form1.cleaned_data['ListInterest']
+#             level = form1.cleaned_data['ListLevel']
+#             competence = form1.cleaned_data['Competence']
+#             # user = form1.cleaned_data['User']
+#             form1.save()
+#             messages.success(request, "Les compétences ont été ajoutées")
+#             form1 = AddCompCollabForm(initial={'Competence': 1 })
+#             # form2 = AddCompetenceForm()
+#         return render(request, 'app/formAddCompetenceCollab.html', context)
 
-
-
-
+#     else:
+#         form1 = AddCompCollabForm(initial={'Competence':  1 })
+#     return render(request, 'app/formAddCompetenceCollab.html', context)
 
 
 
@@ -194,6 +220,7 @@ def CollaboraterProfil(request, user_id):
     competence=Competence.objects.all()
     level=ListLevel.objects.all()
     interest=ListInterest.objects.all()
+
     context = {
         'user':user,
         'collaborater':collaborater,

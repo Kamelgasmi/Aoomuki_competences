@@ -42,7 +42,8 @@
                                 <th class="text-warning" scope="col">Intérêt</th>
                             </tr>
                                 {% for listcompetence in listcompetence%}
-                                {% if listcompetence.Collaborater_id == collaborater.id %}
+                                {% comment %} {% if collaborater.user_id == user.id %} {% endcomment %}
+                                {% if listcompetence.User_id == user.id %}
                                 {% for competence in competence%}
                                 {% if competence.field_id == field.id %}
                                 {% if listcompetence.Competence_id == competence.id %}
@@ -69,6 +70,7 @@
                                 {% endif %}
                                 {% endfor %}
                                 {% endif %}
+                                {% comment %} {% endif %} {% endcomment %}
                                 {% endfor %}
 
                         </table>

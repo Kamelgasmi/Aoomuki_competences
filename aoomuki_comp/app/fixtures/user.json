@@ -1,6 +1,6 @@
 [
     {
-        "model": "app.user",
+        "model": "auth_user",
         "pk": 1,
         "fields": {
           "Lastname": "Gasmi",
@@ -11,7 +11,7 @@
       }
     },
     {
-        "model": "app.user",
+        "model": "auth_user",
         "pk": 2,
         "fields": {
           "Lastname": "Bermont",
@@ -22,7 +22,7 @@
       }
     },
     {
-        "model": "app.user",
+        "model": "auth_user",
         "pk": 3,
         "fields": {
           "Lastname": "Durpoix",
@@ -33,7 +33,7 @@
       }
     },
     {
-        "model": "app.user",
+        "model": "auth_user",
         "pk": 4,
         "fields": {
           "Lastname": "Prêtre",
@@ -44,7 +44,7 @@
       }
     },
     {
-        "model": "app.user",
+        "model": "auth_user",
         "pk": 5,
         "fields": {
           "Lastname": "Langry",

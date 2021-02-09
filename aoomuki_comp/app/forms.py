@@ -5,6 +5,8 @@ from .models import Field, Competence, ListCertification, Society, Collaborater,
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import formset_factory
+from django.forms import modelformset_factory
+# from .fields import GroupedModelChoiceField
 
 # class ParagraphErrorList(ErrorList):
 #     def __str__(self):
@@ -41,20 +43,20 @@ class AddCollaboraterForm(ModelForm):
         }
 
 class AddCompCollabForm(forms.ModelForm):
+    # Competence = forms.ModelMultipleChoiceField(queryset=Competence.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
+    # User = forms.CharField(disabled = True) 
+    # Competence = forms.CharField(disabled = True) 
     class Meta:
         model = ListofCompetence
-        fields = [ "User","Competence", "ListInterest", "ListLevel" ]
+        fields = [ "Competence", "ListInterest", "ListLevel" ]
         widgets = {
-            'User': Select(attrs={'class': 'select','style':'width: 150px'}),
+            # 'User': Select(attrs={'class': 'select','style':'width: 150px'}),
             'Competence': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListInterest': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListLevel':Select(attrs={'class': 'select','style':'width: 150px'}),
         }
-        # form.fields['user'].initial = 'Romuald'
-        # def __init__(self, *args, **kwargs):
-        # user = kwargs.pop('user','')
-        # super(AddCompCollabForm, self).__init__(*args, **kwargs)
-        # self.fields['user_defined_code']=forms.ModelChoiceField(queryset=UserDefinedCode.objects.filter(owner=user))
+
+# form1 = modelformset_factory(ListofCompetence, exclude=('User',))
 
 
 class AddFieldForm(ModelForm):
