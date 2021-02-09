@@ -42,6 +42,18 @@ class AddCollaboraterForm(ModelForm):
 
         }
 
+<<<<<<< HEAD
+class AddCompCollabForm(ModelForm):
+    
+    class Meta:
+        model = ListofCompetence
+        fields = [ "ListInterest", "ListLevel", "User"]
+        widgets = {
+            'User': forms.HiddenInput(),
+            # 'Collaborater': Select(attrs={'class': 'select','style':'width: 150px'}),
+            'ListInterest': RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
+            'ListLevel':RadioSelect(attrs={'class': 'select','style':'width: 150px'}),
+=======
 class AddCompCollabForm(forms.ModelForm):
     # Competence = forms.ModelMultipleChoiceField(queryset=Competence.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
     # User = forms.CharField(disabled = True) 
@@ -54,6 +66,7 @@ class AddCompCollabForm(forms.ModelForm):
             'Competence': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListInterest': Select(attrs={'class': 'select','style':'width: 150px'}),
             'ListLevel':Select(attrs={'class': 'select','style':'width: 150px'}),
+>>>>>>> aa29f99d0ccf6266448d962349975b6083f5cf71
         }
 
 # form1 = modelformset_factory(ListofCompetence, exclude=('User',))

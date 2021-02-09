@@ -102,6 +102,7 @@ def AddCompetenceCollab(request, user_id):
         'form1': form1
     }
     if request.method == 'POST' and 'btnform1' in request.POST:
+<<<<<<< HEAD
         if request.user.is_authenticated:
             form1 = AddCompCollabForm(request.POST)
             if form1.is_valid():
@@ -117,13 +118,35 @@ def AddCompetenceCollab(request, user_id):
                 form1 = AddCompCollabForm()
                 # form2 = AddCompetenceForm()
             return render(request, 'app/formAddCompetenceCollab.html', context)
+=======
+        form1 = AddCompCollabForm(request.POST,initial={'User': request.user.id})
+        if form1.is_valid():
+            interest = form1.cleaned_data['ListInterest']
+            level = form1.cleaned_data['ListLevel']
+<<<<<<< HEAD
+            # user = form1.cleaned_data['User']
+            form1.save(User.id)
+            print(request.POST)
+=======
+            competence = form1.cleaned_data['Competence']
+            user = form1.cleaned_data['User']
+            form1.save()
+>>>>>>> aa29f99d0ccf6266448d962349975b6083f5cf71
+            messages.success(request, "Les compétences ont été ajoutées")
+            form1 = AddCompCollabForm(initial={'User': request.user.id})
+            # form2 = AddCompetenceForm()
+        return render(request, 'app/formAddCompetenceCollab.html', context)
+>>>>>>> 6f7c26e68bc20bab52a3fd9af5578adc5cd2d2cd
 
     else:
         form1 = AddCompCollabForm()
     return render(request, 'app/formAddCompetenceCollab.html', context)
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6f7c26e68bc20bab52a3fd9af5578adc5cd2d2cd
 
 # def AddCompetenceCollab(request, user_id):
 #     field = Field.objects.all()
