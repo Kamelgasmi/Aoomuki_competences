@@ -1,54 +1,47 @@
 from django.contrib import admin
-from .models import Collaborater, Field, Competence, ListWorkStation, ListCertification, Statut, Society, ListofCompetence
+from .models import Field, Competence, ListWorkStation, ListCertification, Statut, Society, ListofCompetence, UserProfil, Collaborater
+from django.contrib.auth.models import User
 
+admin.site.site_header = 'Administration Matrice des compétences AOOMUKI'
 
-
-@admin.register(Competence)
+@admin.register(UserProfil)
+class ProfilAdmin(admin.ModelAdmin):
+    list_display = ('user', 'society','workstation','Extern' )
+    search_fields = ['user__last_name']
+    pass
+#********************************************************************************************************************
 class CompetenceAdmin(admin.ModelAdmin):
+    list_display = ('field','name', )
+    pass
+
+@admin.register(Field)
+class FieldAdmin(admin.ModelAdmin):
+    pass
+
+#********************************************************************************************************************
+class ProfilInline(admin.TabularInline):
+    model = UserProfil
+    fieldsets = [
+        (None, {'fields': ['Extern', 'society','workstation', 'user']})
+        ] # list columns
+
+class UserAdmin(admin.ModelAdmin):
+    inlines = [ProfilInline,] 
+#********************************************************************************************************************
+@admin.register(ListWorkStation)
+class ListWorkStationAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Collaborater)
 class CollaboraterAdmin(admin.ModelAdmin):
-    list_display = ('Lastname', 'Firstname', 'society', 'user')
-    search_fields = ['Lastname', 'Firstname']
-    pass
+    list_display = ('user','user_last_name','user_first_name', 'collaborater' )
+    search_fields = ['user__last_name']
+    def user_last_name(self, obj):
+        return obj.user.last_name
 
-class CompetenceInline(admin.TabularInline):
-    model = Competence
-    fieldsets = [
-        (None, {'fields': ['name',]})
-        ] # list columns
+    def user_first_name(self, obj):
+        return obj.user.first_name
 
-@admin.register(Field)
-class FieldAdmin(admin.ModelAdmin):
-    inlines = [CompetenceInline,] # list of bookings made by a contact
-
-class CollaboraterInline(admin.TabularInline):
-    model = Collaborater
-    fieldsets = [
-        (None, {'fields': ['Lastname', 'Firstname','Extern', 'society','workstation', 'statut',]})
-        ] # list columns
-
-# @admin.register(User)
-# class UserAdmin(admin.ModelAdmin):
-#     inlines = [CollaboraterInline,] # list of bookings made by a contact
-
-class ListofCompetenceInline(admin.TabularInline):
-    model = ListofCompetence
-    fieldsets = [
-        (None, {'fields': ['Competence', 'ListLevel', 'ListInterest']})
-        ] # list columns
-
-# @admin.register(ListLevel)
-# class ListLevelAdmin(admin.ModelAdmin):
-#     pass
-
-# @admin.register(ListInterest)
-# class ListInterestAdmin(admin.ModelAdmin):
-#     pass
-
-@admin.register(ListWorkStation)
-class ListWorkStationAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(ListCertification)
@@ -63,7 +56,12 @@ class StatutAdmin(admin.ModelAdmin):
 class SocietyAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Competence)
+class CompetenceAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(ListofCompetence)
 class ListofCompetenceAdmin(admin.ModelAdmin):
     list_display = ('User', 'Competence', 'ListLevel', 'ListInterest')
+    search_fields = ['User__username']
     pass

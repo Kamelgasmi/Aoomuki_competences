@@ -4,12 +4,22 @@
 
 <div class="right_col" role="main">
     <div class="">
+    <a href="javascript:history.go(-1)">Retour</a>
+
         <div class="page-title">
             <div>
                 <div class="text-center">
                 <h1>LISTE DES COLLABORATEURS</h1>
                 </div>
                 {% include 'app/search_form.html' %}
+                <div class="text-center  text-success" >
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h3>{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                </div> 
+
                 <table class="mb-5 mt-5">
                     {% comment %} <tr>
                         <th class="text-warning" scope="col">NOM / PRENOM</th>
@@ -18,13 +28,13 @@
                     {% for collaborater in collaborater %}
                     <tr height="50">
                         <td width="200" scope="row">
-                            <p>{{ collaborater.Lastname | upper }} {{ collaborater.Firstname }}</p>
+                            <p>{{ collaborater.user.last_name | upper }} {{ collaborater.user.first_name }}</p>
                             <hr>
                         </td>
-                        <td width="200">
-                            <p>{{ collaborater.society.name }}</p>
+                        {% comment %} <td width="200">
+                            <p>{{ profil.society.name }}</p>
                             <hr>
-                        </td>
+                        </td> {% endcomment %}
                         <td width="200">
                             <form class="form-inline" action="{% url 'app:Profils' collaborater_id=collaborater.id %}"  method="post">
                             {% csrf_token %}
@@ -33,7 +43,7 @@
                             <hr>
                         </td>
                         <td width="200">
-                            <form class="form-inline" action="{% url 'app:DeleteCollab' collaborater_id=collaborater.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ collaborater.Lastname }} {{ collaborater.Firstname }} ?');">
+                             <form class="form-inline" action="{% url 'app:DeleteCollab' collaborater_id=collaborater.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ collaborater.Lastname }} {{ collaborater.Firstname }} ?');">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger btn-sm">Supprimer le collaborateur</button>
                             </form> 

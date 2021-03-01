@@ -1,0 +1,54 @@
+
+{% extends 'app/base_site.html' %}
+
+{% block content %} 
+
+<div>
+    <canvas id="Graph-Comp" data-url="{% url 'GraphComp' %}"></canvas>
+</div>
+{% block scripts %} 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script type="text/javascript">
+
+$(function () {
+
+        var ctx = $Graph_Comp[0].getContext("2d");
+
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+            label: 'Competence',
+            backgroundColor: 'blue',
+            data: data.data
+            }]          
+        },
+        options: {
+            responsive: true,
+            legend: {
+            position: 'top',
+            },
+            title: {
+            display: true,
+            text: 'competence'
+            }
+        }
+        });
+var $Graph_Comp = $("#Graph_Comp");
+    $.ajax({
+    url: $Graph_Comp.data("url"),
+    success: function (data) {
+    }
+    
+    });
+
+});
+
+</script>
+{% endblock scripts %} 
+
+    {% endblock %}

@@ -4,8 +4,10 @@
 
 <div class="right_col" role="main">
     <div class="">
+    <a href="javascript:history.go(-1)">Retour</a>
         <div class="page-title">
             <div>
+
                 <div class="text-center">
                 <h1>LISTE DES UTILISATEURS</h1>
                 </div>
@@ -16,22 +18,23 @@
                         <th class="text-warning" scope="col">SOCIETE</th>
                     </tr> {% endcomment %}
                     {% for user in users %}
+
+
                     <tr height="50">
                         <td width="200" scope="row">
                             <p>{{ user.last_name | upper }} {{ user.first_name }}</p>
                             <hr>
                         </td>
-                        {% comment %} <td width="200">
-                            <p>{{ collaborater.society.name }}</p>
+                        {% for profil in profil %}
+                        {% if user.id == profil.user_id %}
+                        <td width="200">
+                            <p>{{ profil.society.name }}</p>
                             <hr>
-                        </td> {% endcomment %}
-                        {% comment %} <td width="200">
-                            <form class="form-inline" action="{% url 'app:Profils' collaborater_id=collaborater.id %}"  method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Voir le profil</button>
-                            </form> 
-                            <hr>
-                        </td> {% endcomment %}
+                        </td>
+                        {% else %}
+                        <p></p> 
+                                                {% endif %}{% endfor %}
+
                         <td width="200">
                             <form class="form-inline" action="{% url 'app:DeleteUser' user_id=user.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ user.Lastname }} {{ user.Firstname }} ');">
                             {% csrf_token %}
@@ -39,7 +42,24 @@
                             </form> 
                             <hr>
                         </td>
+                        {% comment %} {% for profil in profil %}
+                        {% if user.id == profil.user_id %}
+
+                        <td width="200">
+                            <form class="form-inline" action="{% url 'app:Profils' user_id=user.id %}"  method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Voir le profil Collaborateur</button>
+                            </form> 
+                            <hr>
+                        </td>
+                        {% else %}
+                        <p></p>
+                        {% endif %}{% endfor %} {% endcomment %}
                     </tr>
+                                                            {% comment %} {% endif %}
+
+                                        {% endfor %} {% endcomment %}
+
                     {% endfor %}
                 </table>
             </div>

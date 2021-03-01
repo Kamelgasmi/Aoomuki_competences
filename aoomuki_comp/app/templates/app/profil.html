@@ -5,14 +5,19 @@
     <div class="">
         <div class="page-title">
             <div class="">
+            <a href="javascript:history.go(-1)">Retour</a>
+            {% for profil in profil %}
+            {% for user in user %}
+            {% if profil.user_id == collaborater.user_id %}
+            {% if profil.user_id == user.id %}
                 <div class="col-12 text-center">
-                    <h1>{{ collaborater.Lastname }} {{ collaborater.Firstname }} ({{ collaborater.statut.name }})</h1>
-                    <h2>{{ collaborater.society.name }}</h2>
-                    <h2>{{ collaborater.workstation.name }}</h2>
-                    <form class="form-inline" action="{% url 'app:DeleteCollab' collaborater_id=collaborater.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ collaborater.Lastname }} {{ collaborater.Firstname }} ');">
+                    <h1>{{ user.last_name }} {{ user.first_name }}</h1>
+                    <h2>{{ profil.society.name }}</h2>
+                    <h2>{{ profil.workstation.name }}</h2>
+                    {% comment %} <form class="form-inline" action="{% url 'app:DeleteCollab' collaborater_id=collaborater.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ collaborater.Lastname }} {{ collaborater.Firstname }} ');">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm">Supprimer le collaborateur</button>
-                    </form> 
+                    </form>  {% endcomment %}
                 </div>
                 <div class="row border border-success">
                     <div class="col-md-12 text-center text-danger ">
@@ -21,7 +26,7 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-12 text-center ">
-                        {% for certification in collaborater.certification.all %}
+                        {% for certification in profil.certification.all %}
                         <li>{{ certification.name}}</li>
                         {% endfor %}
                     </div>
@@ -42,8 +47,12 @@
                                 <th class="text-warning" scope="col">Niveau</th>
                                 <th class="text-warning" scope="col">Intérêt</th>
                             </tr>
+                                {% comment %} {% for user in user%}
+                                {% if collaborater.user_id == User.id %} {% endcomment %}
+
                                 {% for listcompetence in listcompetence%}
-                                {% if listcompetence.Collaborater_id == collaborater.id %}
+                                {% if listcompetence.User_id == profil.user_id %}
+
                                 {% for competence in competence%}
                                 {% if competence.field_id == field.id %}
                                 {% if listcompetence.Competence_id == competence.id %}
@@ -69,13 +78,21 @@
                                 {% endif %}
                                 {% endif %}
                                 {% endfor %}
+
                                 {% endif %}
                                 {% endfor %}
-
+                                {% comment %} {% endif %}
+                                {% endfor %} {% endcomment %}
                         </table>
                     </div>
                     {% endfor %}
                 </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                                        {% endfor %}
+
+                    {% comment %} {% endfor %} {% endcomment %}
             </div>
         </div>
     </div>

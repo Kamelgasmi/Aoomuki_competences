@@ -4,19 +4,9 @@
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
-            {% if user.is_authenticated%}
-            {% for collaborater in collaborater %}
-            {% if collaborater.user_id == user.id%}
-                <div class="col-12 text-center">
-                    <h1>{{ collaborater.Lastname }} {{ collaborater.Firstname }} ({{ collaborater.statut.name }})</h1>
-                    <h2>{{ collaborater.society.name }}</h2>
-                    <h2>{{ collaborater.workstation.name }} {{ user.last_name }}</h2>
+            <div class="">
+            <a href="javascript:history.go(-1)">Retour</a>
 
-                </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-                <div class="">
                 <div class="text-center text-success " >
                     {% if messages %}
                         {% for message in messages %}
@@ -24,37 +14,33 @@
                         {% endfor %}
                     {% endif %}
                 </div> 
-
-                    {% comment %} {% if user.is_authenticated%}
-                    {% for collaborater in collaborater %}
-                    {% if collaborater.user_id == user.id%}  {% endcomment %}
-                    <div class="col-md-12"> 
+                {% if user.is_authenticated%}
+                {% for collaborater in collaborater %}
+                {% if user.id == collaborater.user_id  %}
+                {% if collaborater.collaborater == True %}
+                <div class="text-center">
+                    <h3>MES COMPÉTENCES</h3>
+                </div>  
+                <div class="col-md-12"> 
+                    <div id=""></div>
                         <div>
-                        {% comment %} {% for competence in competence %}
-                        <p>{{ competence.name | upper}}</p>
-                        <p>{{ competence.id | upper}}</p>
-                        {% endfor %} {% endcomment %}
-                        <form method="POST" class="post-form" action="{% url 'app:Ajouter_des_compétences'  user_id=user.id %}">
-                                {% csrf_token %}
-                                {% comment %} {% for field in field %}    
-                                <h4 class="text-danger">{{ field.name}}</h4>
-                                {% for competence in competence %}
-                                {% if competence.field_id == field.id %}  
-                                <p>{{ competence.name | upper}}</p>  {% endcomment %}
-                                {{ form1.as_p}}
-                                {% comment %} {% endif %}
-                                {% endfor %}
-                                {% endfor %}   {% endcomment %}
-                                <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
-                        </form> 
+                            <form method="POST" class="post-form" class="my-ajax-form" >
+                                    {% csrf_token %}
+                                    {{ form1.as_p}}
+                                    <button type="submit" name="btnform1" class="save btn btn-default">VALIDER</button>
+                            </form> 
                         </div>
                     </div>
-                    {% comment %} {% endif %}
-                    {% endfor %}
-                    {% endif %} {% endcomment %}
-
                 </div>
-
+                {% else %}
+                <div>
+                    <p>Pour ajouter vos compétences, vous devez être enregistrer en tant que collaborateur</p>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

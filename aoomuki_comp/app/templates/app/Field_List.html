@@ -1,0 +1,38 @@
+{% extends "app/base_site.html" %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+    <a href="javascript:history.go(-1)">Retour</a>
+
+    <div class="text-center">
+        <h1>LISTE DES DOMAINES</h1>
+        <a href="{% url 'app:Ajouter_Domaines_Compétences' %}">Ajouter un domaine</a>
+    </div>
+        <div class="text-center text-success " >
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-title">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <table class="mb-5 mt-5">
+                        <h4 class="text-danger">{{ field.name}}</h4>
+                                {% for field in field %}
+                                {% comment %} {% if competence.field_id == field.id %} {% endcomment %}
+                        <tr height="50">
+                            <td width="400" scope="row">
+                                <p>{{ field.name | upper}}</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

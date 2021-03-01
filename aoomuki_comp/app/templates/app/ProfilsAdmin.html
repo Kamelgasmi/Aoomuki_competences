@@ -3,18 +3,19 @@
 {% block content %} 
 <div class="right_col" role="main">
     <div class="">
-    <a href="javascript:history.go(-1)">Retour</a>
-
         <div class="page-title">
             <div class="">
-            {% if user.is_authenticated%}
+            <a href="javascript:history.go(-1)">Retour</a>
             {% for profil in profil %}
-            {% if profil.user_id == user.id%} 
-            <div class="border border-dark">
+            {% if profil.user_id == user.id %}
                 <div class="col-12 text-center">
                     <h1>{{ user.last_name }} {{ user.first_name }}</h1>
                     <h2>{{ profil.society.name }}</h2>
                     <h2>{{ profil.workstation.name }}</h2>
+                    {% comment %} <form class="form-inline" action="{% url 'app:DeleteCollab' collaborater_id=collaborater.id %}"  method="post" onclick="return confirm('Etes vous sur de vouloir supprimer {{ collaborater.Lastname }} {{ collaborater.Firstname }} ');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Supprimer le collaborateur</button>
+                    </form>  {% endcomment %}
                 </div>
                 <div class="row border border-success">
                     <div class="col-md-12 text-center text-danger ">
@@ -28,14 +29,6 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="text-center">
-                <a class="btn btn-info" role="button" href="{% url 'app:Modifier_des_certifications' profil_id=profil.id %}" >Modifier mes informations générales</a>
-                </div>
-            </div>
-                {% for collaborater in collaborater %}
-                {% if profil.user_id == collaborater.user_id  %}
-                {% if collaborater.collaborater == True %}
-
                 <div class="row ">
                     <div class="col-md-12 text-center text-danger ">
                         <h3>DOMAINES / COMPÉTENCES</h3>
@@ -43,6 +36,7 @@
                 </div>
                 <div class="row">
                     {% for field in field %}
+
                     <div class="col-md-12 ">
                         <table class="mb-5 mt-5">
                             <h4 class="text-danger">{{ field.name}}</h4>
@@ -51,9 +45,12 @@
                                 <th class="text-warning" scope="col">Niveau</th>
                                 <th class="text-warning" scope="col">Intérêt</th>
                             </tr>
+                                {% comment %} {% for user in user%}
+                                {% if collaborater.user_id == User.id %} {% endcomment %}
+
                                 {% for listcompetence in listcompetence%}
-                                {% comment %} {% if collaborater.user_id == user.id %} {% endcomment %}
-                                {% if listcompetence.User_id == user.id %}
+                                {% if listcompetence.User_id == profil.user_id %}
+
                                 {% for competence in competence%}
                                 {% if competence.field_id == field.id %}
                                 {% if listcompetence.Competence_id == competence.id %}
@@ -71,9 +68,6 @@
                                         <td width="400" scope="row">
                                             <p>{{ interest.value }}</p>
                                         </td>
-                                        <td width="400" scope="row">
-                                            <a class="btn btn-info" role="button" href="{% url 'app:Modifier_des_compétences' listcompetence_id=listcompetence.id %}" >Modifier</a>
-                                        </td>
                                     </tr>
                                 {% endif %}
                                 {% endfor %}
@@ -82,21 +76,19 @@
                                 {% endif %}
                                 {% endif %}
                                 {% endfor %}
-                                {% endif %}
-                                {% comment %} {% endif %} {% endcomment %}
-                                {% endfor %}
 
+                                {% endif %}
+                                {% endfor %}
+                                {% comment %} {% endif %}
+                                {% endfor %} {% endcomment %}
                         </table>
                     </div>
-                    
                     {% endfor %}
                 </div>
-                                {% endif %}
-                {% endif %}
-                    {% endfor %}
                     {% endif %}
                     {% endfor %}
-                    {% endif %}
+
+                    {% comment %} {% endfor %} {% endcomment %}
             </div>
         </div>
     </div>

@@ -12,8 +12,8 @@
                 {% endif %}
             </div> 
             <div class="" >
-                <h1>Creer un compte</h1>
-                    <form method="post">
+                <h1>CREER UN COMPTE UTILISATEUR</h1>
+                    <form ation="{% url 'app:Enregistrement'  %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p}}
                     <button>Register</button>

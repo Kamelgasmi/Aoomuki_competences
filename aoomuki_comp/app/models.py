@@ -81,19 +81,24 @@ class ListWorkStation(models.Model):
         verbose_name = "Liste postes de travail"
 
 class Collaborater(models.Model):
-    Lastname = models.CharField('Nom',max_length=200, unique=True)
-    Firstname = models.CharField('Prénom',max_length=200, unique=True)
-    Extern = models.BooleanField('Externe ?',default=False)
+    collaborater = models.BooleanField('Etes-vous un collaborateur ?',default=True)
+    user = models.OneToOneField(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True, blank=True, unique=True)
+    def __str__(self):
+        return self.user.username
+    class Meta:
+        verbose_name = "Collaborateur"
+
+class UserProfil(models.Model):
+    Extern = models.BooleanField('Externe à l\'entreprise?',default=False)
     society = models.ForeignKey(Society,verbose_name="Société", on_delete=models.CASCADE, null=True)
     workstation = models.ForeignKey(ListWorkStation, verbose_name="Poste de travail", on_delete=models.CASCADE, null=True)
     certification = models.ManyToManyField(ListCertification, related_name='collaboraters', blank=True)
-    statut = models.ForeignKey(Statut,on_delete=models.CASCADE, null=True)
     user = models.OneToOneField(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True, blank=True, unique=True)
-
     def __str__(self):
-        return self.Lastname
+        return self.user.username
     class Meta:
-        verbose_name = "Collaborateur"
+        verbose_name = "Profil"
+
 
 class ListofCompetence(models.Model):
     User = models.ForeignKey(User, verbose_name="Utilisateur", on_delete=models.CASCADE, null=True)
@@ -104,5 +109,5 @@ class ListofCompetence(models.Model):
     def __str__(self):
         return self.Competence
     class Meta:
-        verbose_name = "Competence"
+        verbose_name = "Competences des utilisateur"
 

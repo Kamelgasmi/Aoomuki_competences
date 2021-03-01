@@ -1,6 +1,6 @@
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
-    <p class="site_title"><i class="fa fa-spinner"></i> <span>Aoomuki</span></p>
+    <a href="{% url 'app:index' %}" class="site_title"><i class="fa fa-spinner"></i> <span>Aoomuki | Accueil</span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -33,24 +33,27 @@
          <li><a><i class="fa fa-edit"></i> MENU <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             {% if user.is_authenticated %}
-                {% if user.is_staff == False %}
-            <li><a href="{% url 'app:Ajouter_des_compétences' user_id=user.id %}">Formulaire Ajout Compétences Collaborateur</a></li>
+              {% if user.is_staff == False %}
+            <li><a href="{% url 'app:Ajouter_des_informations_générales' user_id=user.id %}">1/ Créer mon profil</a></li>
+            <li><a href="{% url 'app:Ajouter_des_compétences' user_id=user.id %}">2/ Formulaire Compétences Collaborateur</a></li>
             <li><a href="{% url 'app:Mon_profil' user_id=user.id %}">Mon profil</a></li>
             {% else %}
             <li><a href="{% url 'app:Mon_profil' user_id=user.id %}">Mon profil</a></li>
+            <li><a href="{% url 'app:Ajouter_des_informations_générales' user_id=user.id %}">Formulaire Informations générales</a></li>
+            <li><a href="{% url 'app:Ajouter_des_compétences' user_id=user.id %}">Formulaire Compétences Collaborateur</a></li>
             <li><a href="{% url 'app:Liste_des_utilisateurs' %}">Liste des utilisateurs</a></li>
-            <li><a href="{% url 'app:Liste_des_collaborateurs' %}">Liste des collaborateurs</a></li>
-            <li><a href="{% url 'app:Ajouter_un_utilisateur/collaborateur' %}">Ajouter un collaborateur</a></li>
             <li><a href="{% url 'app:Enregistrement' %}">Ajouter un utilisateur</a></li>
+            <li><a href="{% url 'app:Liste_des_collaborateurs' %}">Liste des collaborateurs</a></li>
+            <li><a href="{% url 'app:Ajouter_un_collaborateur' %}">Ajouter un collaborater</a></li>
             <li><a href="{% url 'app:Liste_des_domaines' %}">Liste des domaines</a></li>
             <li><a href="{% url 'app:Liste_des_compétences' %}">Liste des compétences</a></li>
             <li><a href="{% url 'app:Liste_des_certifications' %}">Liste des certifications</a></li>
             <li><a href="{% url 'app:Liste_des_sociétés' %}">Liste des sociétés</a></li>
             <li><a href="{% url 'app:Ajouter_Domaines_Compétences' %}">Ajouter Domaines / Compétences / Certifications / Sociétés</a></li>
-            <li><a href="{% url 'app:Formulaire_Compétences_Collaborateur' %}">Formulaire Profil de Compétences Collaborateur</a></li>
-            {% endif %}
-                        {% endif %}
+            <li><a href="{% url 'app:GraphComp' %}">GraphComp</a></li>
 
+            {% endif %}
+                {% endif %}
           </ul>
         </li> 
         {% comment %} <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
