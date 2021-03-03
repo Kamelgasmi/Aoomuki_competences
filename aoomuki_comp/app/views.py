@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+import json
 @login_required
 def index(request):
     # users = User.objects.all()
@@ -465,18 +466,24 @@ def search(request):
     return render(request, 'app/search.html', context)
 
 
-
 def CompetencesGraph(request):
+    
+
     labels = []
     data = []
 
-    queryset = ListofCompetence.objects.values('ListLevel','Competence','User_id')
+    queryset = ListofCompetence.objects.values('ListLevel','Competence')
     for entry in queryset:
         labels.append(entry['Competence'])
         data.append(entry['ListLevel'])
-    
-    return JsonResponse(data={
+    datas = JsonResponse(data={
         'labels': labels,
         'data': data,
     })
+    context = {
+        'datas': datas,
+    }
+    with open("data.json,", "w") as d:
+        json.dump(labels, d)
+    return render(request, 'app/GraphCompetences.html', context)
     

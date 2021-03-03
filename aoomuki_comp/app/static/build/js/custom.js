@@ -699,11 +699,11 @@ function init_chart_doughnut() {
             tooltipFillColor: "rgba(51, 51, 51, 0.55)",
             data: {
                 labels: [
-                    "Symbian",
-                    "Blackberry",
-                    "Other",
-                    "Android",
-                    "IOS"
+                    "PHP",
+                    "python",
+                    "html",
+                    "javascripts",
+                    "CSS"
                 ],
                 datasets: [{
                     data: [15, 20, 30, 10, 30],
@@ -2036,7 +2036,7 @@ function init_charts() {
         return;
     }
 
-    console.log('init_charts');
+    console.log('init_chartsvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
 
 
     Chart.defaults.global.legend = {

@@ -1,7 +1,45 @@
 
-{% extends 'app/base_site.html' %}
+{% comment %} {% extends 'app/base_site.html' %} {% endcomment %}
 
 {% block content %} 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="right_col" role="main">
+    <div class="">
+          <div><p>{{datas}}</p></div>
+          <div class="col-md-6">
+           <canvas id="Chart"></canvas>
+             {% comment %} <canvas class="pie" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas> {% endcomment %}
+          </div>
+    </div>
+</div>
+
+{% block javascripts %} 
+<script>
+  var ctx = document.getElementById('Chart').getContext('2d');
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'radar',
+
+      // The data for our dataset
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+          label: 'My First dataset',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+      },
+
+      // Configuration options go here
+      options: {}
+    });
+</script>
+{% endblock javascripts %}
+
+
+{% endblock %}
+{% comment %} {% block content %} 
 
 <div>
     <canvas id="Graph-Comp" data-url="{% url 'GraphComp' %}"></canvas>
@@ -10,32 +48,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> 
-<script>
-
-    var config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: {{ data|safe }},
-          backgroundColor: [
-            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
-          ],
-          label: 'Population'
-        }],
-        labels: {{ labels|safe }}
-      },
-      options: {
-        responsive: true
-      }
-    };
-
-    window.onload = function() {
-      var ctx = document.getElementById('Graph-Comp').getContext('2d');
-      window.myPie = new Chart(ctx, config);
-    };
-
-  </script>
-{% comment %} <script type="text/javascript">
+<script type="text/javascript">
 
 $(function () {
 
@@ -72,6 +85,6 @@ var $Graph_Comp = $("#Graph_Comp");
 
 });
 
-</script> {% endcomment %}
+</script>
 
-    {% endblock %}
+    {% endblock %} {% endcomment %}
