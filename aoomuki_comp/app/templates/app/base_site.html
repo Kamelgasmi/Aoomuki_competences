@@ -12,14 +12,8 @@
 
       <title>Aoomuki competences  | {% block title %}{% endblock %}</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">
-      {% comment %} <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> {% endcomment %}
-<!--Chart js-->
-      {% block stylesheets %}
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
 
+      {% block stylesheets %}
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
         <script src="http://malsup.github.com/jquery.form.js"></script> 
         <!-- Bootstrap -->
@@ -105,6 +99,11 @@
         <script src="/static/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
         <!-- starrr -->
         <script src="/static/vendors/starrr/dist/starrr.js"></script>
+        {% comment %} <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> {% endcomment %}
+        {% comment %} <script src="/static/vendors/Chart.js/dist/chart.min.js"></script> {% endcomment %}
+
       {% endblock %}
       <!-- Custom Theme Scripts -->
       <script src="/static/build/js/custom.js"></script>

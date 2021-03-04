@@ -966,7 +966,7 @@ function init_autosize() {
 
 function init_parsley() {
 
-    if (typeof(parsley) === 'undefined') {
+    if (typeof(parsley) !== 'undefined') {
         return;
     }
     console.log('init_parsley');

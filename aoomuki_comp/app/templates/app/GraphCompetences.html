@@ -2,40 +2,25 @@
 {% extends 'app/base_site.html' %}
 
 {% block content %} 
-
-<div>
-    <canvas id="Graph-Comp" data-url="{% url 'GraphComp' %}"></canvas>
+<div class="right_col" role="main">
+    <div class="">
+      <div class="text-center">
+        <h1>hhhhhh</h1>
+         <div>
+                      <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+    {% comment %} <canvas id="Graph-Comp" data-url="{% url 'GraphComp' %}"></canvas> {% endcomment %}
 </div>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> 
+      </div>
+    </div>
+</div>
+{% comment %} <div>
+    <canvas id="Graph-Comp" data-url="{% url 'GraphComp' %}"></canvas>
+</div>{% endcomment %}
+{% comment %} {% block javascripts %}
+  {{ block.super }}
+  <!-- Chart.js -->
+  <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
 <script>
-
-    var config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: {{ data|safe }},
-          backgroundColor: [
-            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
-          ],
-          label: 'Population'
-        }],
-        labels: {{ labels|safe }}
-      },
-      options: {
-        responsive: true
-      }
-    };
-
-    window.onload = function() {
-      var ctx = document.getElementById('Graph-Comp').getContext('2d');
-      window.myPie = new Chart(ctx, config);
-    };
-
-  </script>
-{% comment %} <script type="text/javascript">
 
 $(function () {
 
@@ -72,6 +57,7 @@ var $Graph_Comp = $("#Graph_Comp");
 
 });
 
-</script> {% endcomment %}
+</script> 
+{% endblock javascripts %}  {% endcomment %}
 
     {% endblock %}

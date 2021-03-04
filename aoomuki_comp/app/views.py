@@ -161,7 +161,7 @@ def ModifyCompetenceCollab(request, listcompetence_id ):
         'listcompetence': listcompetence,
         'form4': form4
         }
-    return render(request, 'app/FormModifyCompetenceCollab.html', {'form': form})
+    return render(request, 'app/FormModifyCompetenceCollab.html', {'form3': form3})
 
 def AddCollabForm(request):
     collaborater = Collaborater.objects.all()
@@ -467,16 +467,7 @@ def search(request):
 
 
 def CompetencesGraph(request):
-    labels = []
-    data = []
-
-    queryset = ListofCompetence.objects.values('ListLevel','Competence','User_id')
-    for entry in queryset:
-        labels.append(entry['Competence'])
-        data.append(entry['ListLevel'])
+    return render(request, 'app/GraphCompetences.html')
+    # return render(request, 'app/GraphCompetences.html')
     
-    return JsonResponse(data={
-        'labels': labels,
-        'data': data,
-    })
     
