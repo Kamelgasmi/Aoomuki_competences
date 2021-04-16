@@ -93,7 +93,7 @@ class UserProfil(models.Model):
     society = models.ForeignKey(Society,verbose_name="Société", on_delete=models.CASCADE, null=True)
     workstation = models.ForeignKey(ListWorkStation, verbose_name="Poste de travail", on_delete=models.CASCADE, null=True)
     certification = models.ManyToManyField(ListCertification, related_name='collaboraters', blank=True)
-    user = models.OneToOneField(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True, blank=True, unique=True)
+    user = models.ForeignKey(User, verbose_name="Utilisateur ", on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.user.username
     class Meta:

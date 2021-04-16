@@ -31,6 +31,7 @@ urlpatterns = [
     path('GraphComp/', views.CompetencesGraph, name='GraphComp'),
     # re_path(r'^Profil/(?P<user_id>[0-9]+)/$', views.ProfilsAdmin, name='Profils'),
     re_path(r'^(?P<collaborater_id>[0-9]+)/$', views.Profils, name='Profils'),
+    # re_path(r'^GraphCollab(?P<user_id>[0-9]+)/$', views.CompetencesGraphCollab, name='GraphCollab'),
     re_path(r'^DeleteCollab/(?P<collaborater_id>[0-9]+)/$', views.DeleteCollab, name='DeleteCollab'),
     re_path(r'^DeleteUser/(?P<user_id>[0-9]+)/$', views.DeleteUser, name='DeleteUser'),
     re_path(r'^Mon_profil/(?P<user_id>[0-9]+)/$', views.CollaboraterProfil, name='Mon_profil'),

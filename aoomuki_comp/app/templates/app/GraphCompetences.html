@@ -5,7 +5,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="right_col" role="main">
     <div class="">
-          <div><p>{{datas}}</p></div>
+          <div><p> {{labels}} </p></div>
+          <div><p>{{data}}</p></div>
+
           <div class="col-md-6">
            <canvas id="Chart"></canvas>
              {% comment %} <canvas class="pie" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas> {% endcomment %}
@@ -18,16 +20,16 @@
   var ctx = document.getElementById('Chart').getContext('2d');
     var chart = new Chart(ctx, {
       // The type of chart we want to create
-      type: 'radar',
+      type: 'bar',
 
       // The data for our dataset
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: {{labels}},
         datasets: [{
           label: 'My First dataset',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 5, 2, 20, 30, 45]
+          data: {{data}}
         }]
       },
 

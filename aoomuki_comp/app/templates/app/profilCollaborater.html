@@ -7,7 +7,7 @@
 
         <div class="page-title">
             <div class="">
-            {% if user.is_authenticated%}
+            {% if user.is_authenticated %}
             {% for profil in profil %}
             {% if profil.user_id == user.id%} 
             <div class="border border-dark">
@@ -16,6 +16,13 @@
                     <h2>{{ profil.society.name }}</h2>
                     <h2>{{ profil.workstation.name }}</h2>
                 </div>
+                {% comment %} <td width="200">
+                             <form class="form-inline" action="{% url 'app:GraphCollab' user_id=user.id %}"  method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">graph</button>
+                            </form> 
+                            <hr>
+                        </td> {% endcomment %}
                 <div class="row border border-success">
                     <div class="col-md-12 text-center text-danger ">
                         <h3>CERTIFICATIONS</h3>
@@ -99,6 +106,41 @@
                     {% endif %}
             </div>
         </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="right_col" role="main">
+    <div class="">
+          <div class="col-md-6">
+           <canvas id="Chart1"></canvas>
+             {% comment %} <canvas class="pie" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas> {% endcomment %}
+          </div>
+    </div>
+</div>
+
+{% block javascripts %} 
+<script>
+$(document).ready(function(){ 
+  var ctx = document.getElementById('Chart1').getContext('2d');
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+        labels: [{% for item in qs %} '{{item.Competence}}',{% endfor %}]
+        datasets: [{
+          label: 'My First dataset',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: {% for item in qs %} {{item.ListLevel}},{% endfor %}
+        }]
+      },
+
+      // Configuration options go here
+      options: {}
+    });
+});
+</script>
+{% endblock javascripts %}
     </div>
 </div>
 {% endblock %} 

@@ -122,7 +122,6 @@ def AddCompetenceCollab(request, user_id):
                     messages.error(request, "Vous avez déjà ajouté cette compétence")
     else:
         form1 = AddCompCollabForm()
-        form2 = ProfilForm()
         context = {
         'user': user,
         'profil': profil,
@@ -318,6 +317,7 @@ def CollaboraterProfil(request, user_id):
     competence=Competence.objects.all()
     level=ListLevel.objects.all()
     interest=ListInterest.objects.all()
+    qs = user.app_set.all()
     context = {
         'user':user,
         'collaborater':collaborater,
@@ -326,7 +326,8 @@ def CollaboraterProfil(request, user_id):
         'listcompetence':listcompetence,
         'competence':competence,
         'level':level,
-        'interest':interest
+        'interest':interest,
+        'qs':qs
     }
     return render(request, 'app/profilCollaborater.html', context)
 
@@ -467,8 +468,20 @@ def search(request):
 
 
 def CompetencesGraph(request):
-    
+    # labels = []
+    # data = []
 
+    # queryset = ListofCompetence.objects.values('ListLevel','Competence','User')
+    # for entry in queryset:
+    #     labels.append(entry['Competence'])
+    #     data.append(entry['ListLevel'])
+    # context = {
+    #     'labels': labels,
+    #     'data': data,
+    #     'queryset' : queryset
+    # }
+    # return render(request, 'app/GraphCompetences.html', context)
+    
     labels = []
     data = []
 
@@ -476,14 +489,40 @@ def CompetencesGraph(request):
     for entry in queryset:
         labels.append(entry['Competence'])
         data.append(entry['ListLevel'])
-    datas = JsonResponse(data={
+    # JsonResponse(data={ 
+    #     'labels': labels,
+    #     'data': data
+    # })
+    context = {
         'labels': labels,
         'data': data,
-    })
-    context = {
-        'datas': datas,
     }
-    with open("data.json,", "w") as d:
-        json.dump(labels, d)
+    # with open("labels.json,", "w") as l:
+    #     json.dump(labels, l)
+    # with open("data.json,", "w") as d:
+    #     json.dump(labels, d)
     return render(request, 'app/GraphCompetences.html', context)
-    
+
+
+# def CompetencesGraphCollab(request, user_id):
+#     user_id = request.user_id
+#     profile = UserProfil.objects.get(pk=user_id)
+#     qs = profile.listofcompetences_set.all()
+#     context = {
+#         'profile': profile,
+#         'qs': qs
+#     }
+#     return render(request, 'app/GraphCompetencesCollab.html', context)
+
+
+
+
+
+
+# def get_context_data(self, **kwargs):
+#     context = super(ChartView, self).get_context_data(**kwargs)
+#     book = Author.objects.filter(id__in=self.request.user.userprofile.author.all()).order_by('id')
+#     books_count = [ Book.objects.filter(author=cls).count() for cls in book ]
+#     context['book'] = book
+#     context['book_count'] = books_count
+#     return context
